@@ -22,7 +22,7 @@ vector<vector<int> > Solution::generate(int A) {
         for(int j=0;j<=rowNumber;j++)
         {
             if(j==0 || j==rowNumber)
-		       result[rowNumber][j] = result[rowNumber-1][0];
+	       result[rowNumber][j] = result[rowNumber-1][0];
             else
                result[rowNumber][j] = result[rowNumber-1][j] + result[rowNumber-1][j-1];
         }
