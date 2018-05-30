@@ -18,9 +18,8 @@ vector<int> Solution::getRow(int A) {
         for(int j=0;j<=columnNumber+1;j++)
         {
             if(j==0)
-	            result[j] = prevRow[j];
-	        else 
-	        if(j==(columnNumber+1))
+	    	result[j] = prevRow[j];
+	    else if(j==(columnNumber+1))
                 result.push_back(prevRow[0]);
             else
                 result[j] = prevRow[j] + prevRow[j-1];
