@@ -8,30 +8,24 @@ vector<vector<int> > Solution::generate(int A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
 
-    vector<vector<int> > B; 
+    vector<vector<int> > result;
+    if(A >=1)
+        result.push_back(vector<int>(1,1));
 
-    vector<int> firstrow(1,1);
-    vector<int> secondrow(2,1);
-
-    if(A>=1)    
-        B.push_back(firstrow);
-    if(A>=2)
-        B.push_back(secondrow);
-
-    for(int i=2;i<A;i++)
+    if(A >=2)
+        result.push_back(vector<int>(2,1));
+        
+    for(int rowNumber=2;rowNumber<A;rowNumber++)
     {
-        vector<int> myRow(i+1,0);
-        B.push_back(myRow);
-        for(int j=0;j<i+1;j++)
+        vector<int> currentRow(rowNumber+1,0);
+        result.push_back(currentRow);
+        for(int j=0;j<=rowNumber;j++)
         {
-            if(j==0 || j==i)
-           //B[i].push_back(B[i-1][0]);
-           B[i][j] = B[i-1][0];
+            if(j==0 || j==rowNumber)
+		       result[rowNumber][j] = result[rowNumber-1][0];
             else
-               //B[i].push_back(B[i-1][j] + B[i-1][j-1]);   
-               B[i][j] = B[i-1][j] + B[i-1][j-1];
+               result[rowNumber][j] = result[rowNumber-1][j] + result[rowNumber-1][j-1];
         }
     }
-    return B;
+    return result;
 }
-
