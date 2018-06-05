@@ -7,29 +7,17 @@ vector<int> Solution::wave(vector<int> &A) {
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
-   vector<int> B;
-    int temp,first,second,flag=1;
     
     sort(A.begin(),A.end());
     
-    first=A[0];
-    for(int i=1;i<A.size();i++)
+    // Swap adjacent pairs
+    int i=0;
+    while(i+1 < A.size())
     {
-     if(i%2==1)
-     {
-        second=A[i];
-        B.push_back(second);
-        B.push_back(first);
-        flag=0;
-     }
-     else
-     {
-         first=A[i];
-         flag=1;
-     }
+        int temp = A[i];
+        A[i] = A[i+1];
+        A[i+1] = temp;
+        i= i+2;
     }
-    
-    if(flag==1)
-        B.push_back(first);
-    return B;
+    return A;
 }
