@@ -26,8 +26,7 @@ A + B = 6
 
 A = 4/2 = 2
 
-B = (A + B) - A;
-
+B = (A + B) - A = 6 - 2 = 4
 */
 
 vector<int> Solution::repeatedNumber(const vector<int> &A) {
@@ -53,13 +52,11 @@ vector<int> Solution::repeatedNumber(const vector<int> &A) {
     aMinusb = acutalSum - expectedSum;
     aPlusb = (acutalSquareSum - expectedSquareSum)/(aMinusb);
     
-    a = (aPlusb + aMinusb)/2;
-    
+    a = (aPlusb + aMinusb)/2;    
     b = aPlusb  - a;
     
     ans.push_back(a);
     ans.push_back(b);
     
-    return ans;
-        
+    return ans;        
 }
