@@ -8,71 +8,44 @@ vector<vector<int> > Solution::generateMatrix(int A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    vector < vector<int> > mat;
+        // DO STUFF HERE AND POPULATE result
+    vector<vector<int> > result(A, vector<int>(A,0));
     
-    int left=0,right=A-1,top=0,bottom=A-1;    
-    int dir = 0,count=0;
+    if(A==0)
+        return result;
+    int T=0,B=A-1,L=0,R=A-1, dir = 0;
     
-    
-    int value=0;
-    for(int i=0;i<A;i++)
+    int number = 1;
+    while(T<=B && L<=R)
     {
-        vector <int> temp;
-        for(int j=0;j<A;j++)
+        if(dir==0) // Traverse Left to Right
         {
-            temp.push_back(value);
+            for(int j=L;j<=R;j++)
+                result[T][j] = number++;
+            T++;
         }
-        mat.push_back(temp);
-    }
-    
-    while( left <= right && top <= bottom)
-    {
-        if(dir==0)
+        else
+        if(dir==1) // Traverse Top to Bottom
         {
-            for(int i=left;i<=right;i++)
-            {
-                count++;
-                mat[top][i] = count;
-                //printf("%d ",mat[top][i]);
-            }
-            top++;    
+            for(int i=T;i<=B;i++)
+                result[i][R] = number++;
+            R--;
         }
-        else 
-        if(dir == 1)
+        else
+        if(dir==2)
         {
-            for(int i=top;i<=bottom;i++)
-            {
-                count++;
-                //printf("%d ",mat[i][right]);
-                mat[i][right]=count;
-            }    
-            right--;    
-        }
-        else 
-        if(dir == 2)
-        {
-            for(int i=right;i>=left;i--)
-            {
-                count++;
-                //printf("%d ",mat[bottom][i]);
-                mat[bottom][i]=count;
-            }
-            bottom--;    
+            for(int j=R;j>=L;j--)
+                result[B][j] = number++;
+            B--;
         }
         else
         {
-            for(int i=bottom;i>=top;i--)
-            {
-                count++;
-                //printf("%d ",mat[i][left]);
-                mat[i][left] = count;
-            }
-                
-            left++;    
+            for(int i=B;i>=T;i--)
+                result[i][L] = number++;
+            L++;    
         }
-        
-        dir = (dir+1)%4;
+        dir = (dir + 1)%4;
     }
-    return mat;
     
+    return result;
 }
