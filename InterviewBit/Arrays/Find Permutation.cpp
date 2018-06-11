@@ -4,37 +4,28 @@ https://www.interviewbit.com/problems/find-permutation/
 
 vector<int> Solution::findPerm(const string A, int B) {
 
-    int sizeOfString = A.size();
-    int totalD=1,totalI=B;
-    for(int i=0;i<sizeOfString;i++)
+    vector<int> ans;
+    int IndexOfD = 0, IndexOfI=B+1;
+
+    for(int i=0;i<B-1;i++)
     {
         if(A[i]=='D')
-            totalD++;
+            IndexOfD++;
         else
-            totalI--;
+            IndexOfI--;
     }
 
-    vector<int> ans;
-    //for(int i=0;i<B;i++)
-    //{
-    //    process.push_back(i+1);
-    //}
-
-    int pointerForD = totalD,pointerForI = totalD+1;
-
-    if(A[0]=='I')
-        ans.push_back(1);
+    if(A[0]=='D')
+        ans.push_back(IndexOfD+1);
     else
-        ans.push_back(B);
+        ans.push_back(IndexOfI-1);
 
-    for(int i=0;i<sizeOfString;i++)
+    for(int i=0;i<B-1;i++)
     {
-        if(A[i]=='I')
-            ans.push_back(pointerForI++);
+        if(A[i]=='D')
+            ans.push_back(IndexOfD--);
         else
-            ans.push_back(--pointerForD);
+            ans.push_back(IndexOfI++);
     }
-
     return ans;
-
 }
