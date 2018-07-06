@@ -1,28 +1,35 @@
-/*
-https://www.interviewbit.com/problems/rotated-sorted-array-search/
-*/
-
 int findByBinarySearch(const vector<int> &A, int low, int high, int key)
 {
-    if(low > high)
-        return -1;
-    
-    int mid = low + (high-low)/2;
-    if(A[mid] == key)
-        return mid;
-        
-    if(A[low] <= A[mid]) // low to mid is sorted
+    int start = 0, end = A.size()-1, mid;
+    while(start<=end)
     {
-        if(key >= A[low] && key <= A[mid])
-            return findByBinarySearch(A,low,mid,key);
+        mid = start + (end - start)/2;
+        
+        if(A[mid] == key)
+            return mid;
             
-        return findByBinarySearch(A,mid+1,high,key);
+        if(A[start] == A[mid] && A[mid] == A[end]) // This condition helps with duplicates
+        {
+            ++start;
+            --end;
+        }
+        else
+        if(A[start] <= A[mid]) // Left part is sorted
+        {
+            if(key >= A[start] && key < A[mid]) 
+                end = mid-1;
+            else 
+                start = mid+1; 
+        }
+        else // Right part is sorted
+        {
+            if(key > A[mid] && key <= A[end]) 
+                start = mid+1;
+            else 
+                end = mid-1; 
+        }
     }
-    
-    if (key >= A[mid] && key <= A[high])
-        return findByBinarySearch(A, mid+1, high, key);
- 
-    return findByBinarySearch(A, low, mid-1, key);
+    return -1;
 }
 
 int Solution::search(const vector<int> &A, int B) {
