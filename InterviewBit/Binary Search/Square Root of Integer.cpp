@@ -8,25 +8,23 @@ int Solution::sqrt(int A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    long long int i=1, left = 1, right = A, mid,ans;
     if(A==0 || A==1)
         return A;
     
-    while(left<=right)
+    long long int start = 0, end = A, mid,prevMid;
+    double diff, precision = 0.0005;
+    prevMid = 0;
+    mid = start + (end - start)/2;
+    diff = abs(mid - prevMid);
+    while((mid*mid) != A && diff > precision)
     {
-        mid = left + (right - left)/2;
-        
-        if(mid * mid == A)
-            return mid;
-        else
         if(mid * mid > A)
-            right = mid - 1;
+            end = mid;
         else
-        {
-            left = mid + 1;
-            ans = mid;
-        }
+            start = mid;
+        prevMid = mid;
+        mid = start + (end - start)/2;
+        diff = abs(mid - prevMid);
     }
-    
-    return ans;
+    return mid;
 }
