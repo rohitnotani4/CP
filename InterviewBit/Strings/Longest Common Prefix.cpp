@@ -1,11 +1,6 @@
 /*
-
+https://www.interviewbit.com/problems/longest-common-prefix/
 */
-
-int findMin(int a,int b)
-{
-    return (a < b) ? a : b;
-}
 
 string Solution::longestCommonPrefix(vector<string> &A) {
     // Do not write main() function.
@@ -15,16 +10,15 @@ string Solution::longestCommonPrefix(vector<string> &A) {
     if(A.size() == 1)
         return A[0];
     
-    int min = A[0].size();
-    // cout<<"Min "<<min<<"\n";
+    int minStringSize = A[0].size();
     for(int i=1;i<A.size();i++)
     {
-        min = findMin(min, A[i].size());
+        int size = A[i].size();
+        minStringSize = min(minStringSize, size);
     }
-    // cout<<"Min "<<min<<"\n";
     
     string ans;
-    for(int j=0;j<min;j++)
+    for(int j=0;j<minStringSize;j++)
     {
         for(int i=1;i<A.size();i++)
         {
@@ -33,6 +27,5 @@ string Solution::longestCommonPrefix(vector<string> &A) {
         }
         ans.push_back(A[0][j]);
     }
-    
     return ans;
 }
