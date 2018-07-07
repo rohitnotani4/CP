@@ -2,52 +2,35 @@
 https://www.interviewbit.com/problems/palindrome-string/
 */
 
+bool isAlphanumeric(char c)
+{
+    if((c>='0' && c<='9') || (c>='A' && c<='Z') || (c>='a' && c<='z'))
+        return true;
+    return false;
+}
+
 int Solution::isPalindrome(string A) {
     // Do not write main() function.
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     if(A.size() < 2)
-    return 1;
+        return 1;
 
-    string alphanumeric;
-    for(int i=0;i<A.size();i++)
+    int start=0, end=A.size()-1;
+    while(start<end)
     {
-        if( (A[i] >= 65 && A[i] <= 90) || (A[i] >= 97 && A[i] <= 122) || (A[i] >= 48 && A[i] <= 57) )
-            alphanumeric.push_back(A[i]);
-    }
-    // cout<<alphanumeric<<"\n";
-    int n = alphanumeric.size();
-    int mid = n/2;
-    for(int i=0,j=n-1;i<mid;i++,j--)
-    {
-        if(alphanumeric[i] >= 65 && alphanumeric[i] <= 90)
-        {
+        while(start<end && !isAlphanumeric(A[start]))
+            start++;
 
-            if(alphanumeric[i] ==  alphanumeric[j] || char(alphanumeric[i]+32) == alphanumeric[j])
-            {
+        while(end>start && !isAlphanumeric(A[end]))
+            end--;
 
-            }
-            else
-                return 0;
+        if(A[start]!=A[end] && (abs((A[start]-'0') - (A[end]-'0'))!=32))
+            return 0;
 
-        }
-        else
-        if(alphanumeric[i] >= 'a' && alphanumeric[i] <='z')
-        {
-
-            if(alphanumeric[i] == alphanumeric[j] || char(alphanumeric[i]-32) == alphanumeric[j])
-            {
-
-            }
-            else
-                return 0; 
-        }
-        else
-        {
-            if(alphanumeric[i] != alphanumeric[j])
-                return 0;
-        }
+        start++;
+        end--;
     }
     return 1;
 }
