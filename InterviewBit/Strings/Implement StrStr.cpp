@@ -2,7 +2,7 @@
 https://www.interviewbit.com/problems/implement-strstr/
 */
 
-int Solution::strStr(const string &haystack, const string &needle) {
+int Solution::strStr(string haystack, string needle) {
         // Do not write main() function.
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
