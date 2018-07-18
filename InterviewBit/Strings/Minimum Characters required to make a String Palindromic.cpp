@@ -2,51 +2,50 @@
 https://www.interviewbit.com/problems/minimum-characters-required-to-make-a-string-palindromic/
 */
 
-int Solution::solve(string A) {
-    
-    int mid,left,right,ans;
-    
-    if(A.size() <= 1 || (A.size() == 2 && A[0]==A[1]))
-        return 0;
-    else
-    if(A.size() == 2)
-        return 1;
-    
-    if(A.size()%2)
+int computeLPS(string input)
+{
+    vector<int> LPS(input.size(),0);
+    int prefixEnd = 0;
+    for(int currentIndex = 1;currentIndex < LPS.size(); currentIndex++)
     {
-        mid = A.size()/2;
-        left = mid - 1;
-        right = mid + 1;
-    }
-    else
-    {
-        left = (A.size()/2) - 1;
-        mid = right = left + 1;
-    }
-    
-    while(mid >=1 && left>=0 && right<=A.size()-1)
-    {
-        if(A[left] == A[right])
+        if(input[prefixEnd]==input[currentIndex])
         {
-            left--;
-            right++;
+            LPS[currentIndex] = LPS[currentIndex-1] + 1;
+            prefixEnd++; //Extend match in prefix and postfix
         }
         else
         {
-            mid = left;
-            left = mid - 1;
-            right = mid + 1;
+            // We try to match a shorter substring by assigning prefixEnd to 
+            // LPS[currentIndex-1], we will shorten the match string length, 
+            // and jump to the prefix part that we used to match postfix ended at i - 1
+            prefixEnd = LPS[currentIndex - 1];
+            
+            while(prefixEnd > 0 && input[prefixEnd]!=input[currentIndex])
+            {
+                prefixEnd = LPS[prefixEnd - 1];
+            }
+            
+            if(input[prefixEnd]==input[currentIndex])
+            {
+                prefixEnd++;
+            }
+            
+            LPS[currentIndex] = prefixEnd;
         }
     }
-        
-    if(right > A.size() && left < 0)
+    return LPS[input.size()-1];
+}
+
+int Solution::solve(string A) {
+
+    if(A.size() < 1)
         return 0;
-    else
-    {
-        ans = A.size()-right;
-        //cout<<"Ans = "<<ans<<" and Right = "<<right<<"\n";
-        if(ans > 0 && (A[0] == A[1]))
-            ans = ans -1;
-    }
-    return ans;   
+        
+    string copyInput(A); // Create to copy to reverse and concatenate
+    reverse(copyInput.begin(),copyInput.end());
+    string combinedString = A + " " + copyInput;
+    
+    //Get the maximum size palindrome in combined string from start i.e. 0
+    int longestPalindromeFromStart = computeLPS(combinedString);
+    return A.size() - longestPalindromeFromStart;
 }
