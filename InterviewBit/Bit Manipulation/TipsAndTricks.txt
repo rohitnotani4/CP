@@ -1,0 +1,5 @@
+1. Min XOR pair in an array of 'N' elements 
+  - Sort the array and take XOR of adjacent elements
+  
+2. Max XOR pair in an array of 'N' elements 
+  - 
