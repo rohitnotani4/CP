@@ -2,4 +2,5 @@
   - Sort the array and take XOR of adjacent elements
   
 2. Max XOR pair in an array of 'N' elements 
-  - 
+  - If the value of elements fall in the range of long/int, this can be done in O(n) time
+  - Check from the MSB and find the pair in which one element has that bit set and other element bit unset
