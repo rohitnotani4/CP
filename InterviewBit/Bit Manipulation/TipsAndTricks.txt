@@ -10,3 +10,5 @@
 4. Must Read : https://leetcode.com/problems/single-number-ii/discuss/43295/Detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers
 
 5. If we do (x & (x - 1)), it would just unset the last set bit in x.
+
+6. Try to perform the calculation on individual bits, usually taking the assumption of 32/64 bits, many O(n^2)/O(n log n) complexity problems can be solved in O(n) complexity.
