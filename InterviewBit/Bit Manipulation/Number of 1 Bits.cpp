@@ -8,14 +8,11 @@ int Solution::numSetBits(unsigned int A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    int test = 1,count = 0;
-    for(int i=0;i<32;i++)
+    int count = 0;
+    while(A>0)
     {
-        if(A & test)
-        {
-            count++;
-        }
-        test = test << 1;
+        A = A & (A-1);
+        count++;
     }
     return count;
 }
