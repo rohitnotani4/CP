@@ -8,3 +8,5 @@
 3. XOR can be used to find a number which repeats only once, if all other elements repeat twice.
 
 4. Must Read : https://leetcode.com/problems/single-number-ii/discuss/43295/Detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers
+
+5. If we do (x & (x - 1)), it would just unset the last set bit in x.
