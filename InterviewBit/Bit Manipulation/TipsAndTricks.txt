@@ -6,3 +6,5 @@
   - Check from the MSB and find the pair in which one element has that bit set and other element bit unset
 
 3. XOR can be used to find a number which repeats only once, if all other elements repeat twice.
+
+4. Must Read : https://leetcode.com/problems/single-number-ii/discuss/43295/Detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers
