@@ -1,0 +1,2 @@
+1. Merging two sorted arrays, in-order to update the same array, append it with remaining count 
+and traverse both arrays from last element
