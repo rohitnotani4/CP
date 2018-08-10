@@ -2,53 +2,32 @@
 https://www.interviewbit.com/problems/minimize-the-absolute-difference/
 */
 
-char calculateMin(vector<int> &A, vector<int> &B, vector<int> &C,int i,int j,int k)
-{
-    char minEleArray;
-    if(A[i] <= B[j] && A[i] <= C[k])
-    {
-        minEleArray='A';
-    }
-    else
-    if(B[j] <= A[i] && B[j] <= C[k])
-    {
-        minEleArray='B';
-    }
-    else
-        minEleArray='C';
-        
-    return minEleArray;
-}
- 
- 
-int calculateMaxMinDiff(vector<int> &A, vector<int> &B, vector<int> &C,int i,int j,int k)
-{
-    return abs(max(max(A[i],B[j]),C[k]) - min(min(A[i],B[j]),C[k]));
-}
- 
 int Solution::solve(vector<int> &A, vector<int> &B, vector<int> &C) {
-    
-    int totalSize = A.size() + B.size() + C.size();
-    int minEleIndex = 0, minDiff,currDiff;
-    
-    
-    char minEleArray;
-    minDiff = INT_MAX;
-    for(int i=0,j=0,k=0;i<A.size() && j<B.size() && k < C.size();)
+    int result = INT_MAX;
+    int i = 0, j = 0, k = 0;
+    while(i<A.size() && j < B.size() && k < C.size())
     {
-        currDiff = calculateMaxMinDiff(A,B,C,i,j,k);
-        if(currDiff < minDiff)
-            minDiff = currDiff;
         
-        minEleArray = calculateMin(A,B,C,i,j,k);
-        // Increase the min 
-        if(minEleArray == 'A')
+        int minimum = min(A[i], min(B[j], C[k]));
+        int maximum = max(A[i], max(B[j], C[k]));
+ 
+        // Update result if current diff is less than the min
+        // diff so far
+        if (maximum-minimum < result)
+        {
+             result = maximum - minimum;
+             if(result == 0)
+                break;
+        }
+        
+        if(A[i]==minimum)
             i++;
         else
-        if(minEleArray == 'B')
+        if(B[j]==minimum)
             j++;
         else
             k++;
+        
     }
-    return minDiff;
+    return result;
 }
