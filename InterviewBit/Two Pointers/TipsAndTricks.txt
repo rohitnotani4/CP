@@ -1,2 +1,11 @@
 1. Merging two sorted arrays, in-order to update the same array, append it with remaining count 
-and traverse both arrays from last element
+   and traverse both arrays from last element
+
+2. Minimize | max(a,b,c) - min(a,b,c) | 
+   or Minimize  max(abs(A[i] - B[j]), abs(B[j] - C[k]), abs(C[k] - A[i])) is same i.e we can simply find 
+   min and max of the 3 and in each iteration do away with lowest/greatest number and increment the index 
+
+3. To remove all instances of an element in-place in an unsorted array, we can place all non matching elements 
+   from start of array using a separate index which increments only when we don't match with the element to delete.
+   
+4.    
