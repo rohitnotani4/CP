@@ -8,4 +8,11 @@
 3. To remove all instances of an element in-place in an unsorted array, we can place all non matching elements 
    from start of array using a separate index which increments only when we don't match with the element to delete.
    
-4.    
+4. Deleting duplicates from sorted array:
+   https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/discuss/27970/Share-my-O(N)-time-and-O(1)-solution-when-duplicates-are-allowed-at-most-K-times
+   
+5. 2 Sum i.e Find a pair the given difference/sum in an unsorted/sorted array
+   - If array is not sorted, sort it
+   - On sorted array, you can use hasing to find other element by fixing one element. This adds O(n) space and time complexity
+   - On sorted array, you can also use 2 pointers (to adhere to space constraints), starting at index 0 and 1 and incrementing
+     the appropriate index based on the sum obtained by 2 elements at those indexes.
