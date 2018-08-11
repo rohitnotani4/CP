@@ -8,11 +8,11 @@ int Solution::removeDuplicates(vector<int> &A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    int arraySize = A.size();
-    if(arraySize <= 2)
+    int arraySize = A.size(), duplicateCount = 1;
+    if(arraySize <= duplicateCount)
         return arraySize;
         
-    int count = 1, currentIndex = 1, i =1, duplicateCount = 1;      
+    int count = 1, currentIndex = 1, i =1, ;      
     while(i < arraySize)
     {
         if(A[i] != A[i-1])
