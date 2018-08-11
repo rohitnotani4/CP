@@ -2,18 +2,23 @@
 https://www.interviewbit.com/problems/evaluate-expression/
 */
 
-int applyOperation(vector<string> &A,int firstNumber, int secondNumber,int i)
+bool isOperator(char opr)
 {
-    if(A[i][0] =='+')
+    return opr=='+' || opr == '*' || opr == '-' || opr =='/';
+}
+
+int applyOperation(char opr, int firstNumber, int secondNumber)
+{
+    if(opr =='+')
         return (firstNumber + secondNumber);
     else
-    if(A[i][0] =='*')
+    if(opr =='*')
         return (firstNumber * secondNumber);
     else
-    if(A[i][0] =='-')
+    if(opr =='-')
         return (firstNumber - secondNumber);
     else
-    if(A[i][0] =='/')
+    if(opr =='/')
         return (firstNumber / secondNumber);
     else
         return 0;
@@ -25,48 +30,32 @@ int Solution::evalRPN(vector<string> &A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    stack<int> operands;
+    stack<int> numbers;
     int answer = 0;
-    string::size_type sz;   // alias of size_t
-    // cout<<"Array size "<<A.size()<<"\n";
     for(int i=0;i<A.size();i++)
     {
-        
-        if(A[i].size()==1 && (A[i][0] =='+' || A[i][0] =='*' || A[i][0] =='-' || A[i][0] =='/'))
+        if(A[i].size() == 1 && isOperator(A[i][0]))
         {
-            int secondNumber,firstNumber = 0;
-            if(!operands.empty())
-            {
-                secondNumber = operands.top();
-                operands.pop();
-                if(!operands.empty())
-                {
-                    firstNumber = operands.top();
-                    operands.pop();
-                }
-                answer = applyOperation(A,firstNumber,secondNumber,i);
-                operands.push(answer);
-            }
+            int secondNumber = numbers.top();
+            numbers.pop();
+            int firstNumber = numbers.top();
+            numbers.pop();
+            numbers.push(applyOperation(A[i][0], firstNumber,secondNumber));
         }
         else
         {
-            //cout<<"String size "<<A[i].size()<<"\n";
-            string temp;
-            int minus = 1,j=0;
-            if(A[i][0] == '-')
+            string::size_type sz;
+            if(A[i][0]=='-')
             {
-                minus = -1;
-                j=1;
+                string temp(A[i].begin()+1, A[i].end());
+                numbers.push(-1 * stoi(temp,&sz));
             }
-                
-            for(;j<A[i].size();j++)
-                temp.push_back(A[i][j]);
-                
-            int number = minus * (stoi(temp,&sz));
-            operands.push(number);    
-            
-            // cout<<"This is : "<<number<<"\n";
+            else
+            {
+                string temp(A[i]);
+                numbers.push(stoi(temp,&sz));
+            }
         }
     }
-    return operands.top();
+    return numbers.top();
 }
