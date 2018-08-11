@@ -12,7 +12,7 @@ int Solution::removeDuplicates(vector<int> &A) {
     if(arraySize <= duplicateCount)
         return arraySize;
         
-    int count = 1, currentIndex = 1, i =1, ;      
+    int count = 1, currentIndex = 1, i =1;      
     while(i < arraySize)
     {
         if(A[i] != A[i-1])
