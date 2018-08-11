@@ -8,21 +8,25 @@ int Solution::removeDuplicates(vector<int> &A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    int size = A.size();
-    if(size <= 1)
-        return size;
-    
-    int prevIndex = 0, currIndex = 1, uniqueElements = 1;
-    while(currIndex < size)
+    int arraySize = A.size();
+    if(arraySize <= 2)
+        return arraySize;
+        
+    int count = 1, currentIndex = 1, i =1, duplicateCount = 1;      
+    while(i < arraySize)
     {
-        if(A[currIndex] != A[prevIndex])
+        if(A[i] != A[i-1])
         {
-            A[uniqueElements] = A[currIndex];
-            prevIndex = currIndex;
-            uniqueElements++;
+            count = 1;
+            A[currentIndex++] = A[i];
         }
-        currIndex++;
+        else
+        if(count < duplicateCount)
+        {
+            A[currentIndex++] = A[i];
+            count++;
+        }
+        i++;
     }
-    
-    return uniqueElements;
+    return currentIndex;
 }
