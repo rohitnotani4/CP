@@ -2,54 +2,36 @@
 https://www.interviewbit.com/problems/sliding-window-maximum/
 */
 
-
-
-void initializeWindow(const vector<int> &A,int n,int begin,int k,deque<int> &DQ){
-    int i=begin;
-    while(i<n && i<begin+k)
-    {
-        if(DQ.empty() || DQ.back()<=A[i])
-            DQ.push_back(A[i]);
-        i++;
-    }
-}
-
 vector<int> Solution::slidingMaximum(const vector<int> &A, int B) {
     // Do not write main() function.
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
-
-    deque<int> DQ;
-
-    int i = 0, p =-1;
-    int n = A.size();
-
-    vector<int> ans;
-    initializeWindow(A,n,0,B,DQ);
-    ans.push_back(DQ.back());
-    i+=B;
-
-    while(i<n)
+    
+    deque<int> dq;
+    int windowSize = B;
+    vector<int> result;
+    for(int i=0;i<A.size();i++)
     {
-        p=i-B;
-
-        if(A[p]==DQ.front())
-            DQ.pop_front();
-
-        if(DQ.empty())
-        {
-            initializeWindow(A,n,p+1,B,DQ);
-            ans.push_back(DQ.back());
-        }
-        else
-        {
-            if(A[i]>=DQ.back())
-                DQ.push_back(A[i]);
-
-            ans.push_back(DQ.back());
-        }
-        i++;
+        // Remove indexes from front of deque which don't fall in current 
+        // window i.e window ending at ith index
+        while(!dq.empty() && dq.front() <= (i-windowSize))
+            dq.pop_front();
+            
+        // Now compare the rear of deque with the current index. 
+        // If the element at current index is greater than element at index at deque end(rear)
+        // We remove that index from rear. To understand this, think of going left from 
+        // current index upto windowSize, since A[rear_index] < A[currentIndex], any window 
+        // which invovle these 2 indexes would never have rear_index element as Maximum
+        while(!dq.empty() && A[dq.back()] < A[i])
+            dq.pop_back();
+ 
+        // Push the current index to deque
+        dq.push_back(i);
+        
+        // Store the max of current window to the result
+        if(i >= windowSize-1)
+            result.push_back(A[dq.front()]);
     }
-    return ans;
+    return result;
 }
