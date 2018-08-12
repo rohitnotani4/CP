@@ -1,0 +1,13 @@
+1.  Simulation : Simplify Directory Path,  	Redundant Braces, Evaluate Expression
+
+2.  Find the nearest smaller element for each element in array *****IMP*****
+    - Brute force way is to run 2 loops and for each element go all the way till 0th index. O(n^2) time complexity.
+    - Here if we somehow manage to insert and delete the element only once in a DS, we can reduce the time complexity to O(n)
+    - This is where Stack comes into picture, for each element we make sure the top of the stack is the largest element 
+      in the stack and when a smaller element is visited from input array we remove untill the top is less than the array
+      element and push this item on stack.
+      
+      ****This works because whenever we add an item to the stack, we know its value is greater or equal to every element 
+      in the stack already. When we visit an element in the array, we know that if it's lower than any item in the stack, 
+      it must be lower than the last item in the stack, because the last item must be the largest. So we don't need to do 
+      any kind of search on the stack, we can just consider the last item.
