@@ -8,33 +8,41 @@ int Solution::largestRectangleArea(vector<int> &A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    stack<int> IndexStack;
-    int maxArea = 0, currArea = 0, i=0, currIndex, popedIndex;
-    for(;i<=A.size();i++)
+    stack<int> indexes;
+    int currArea = INT_MIN, maxArea = INT_MIN;
+    int i=0;
+    while(i<A.size())
     {
-        if(IndexStack.empty() || (i!=A.size() && A[IndexStack.top()] <= A[i]))
+        if(indexes.empty() ||  A[indexes.top()] <= A[i])
         {
-            // cout<<"Pushed Index i = "<<i<<"\n";
-            IndexStack.push(i);
+            indexes.push(i);
+            i++;
         }
         else
         {
-            // cout<<"Start poping i = "<<i<<"\n";
-            currIndex = i;
-            currArea = 0;
-            while(!IndexStack.empty() && (i==A.size() || A[IndexStack.top()] > A[i]))
+            while(!indexes.empty() && A[indexes.top()] > A[i])
             {
-                popedIndex = IndexStack.top();
-                IndexStack.pop();
-                if(IndexStack.empty())
-                    currArea = A[popedIndex] * i;
-                else
-                    currArea = A[popedIndex] * (currIndex - IndexStack.top() - 1);
-                maxArea = max(maxArea, currArea);
-                // cout<<"CurrArea = "<<currArea<<" Maxarea = "<<maxArea<<"\n";
+                int popedIndex = indexes.top();
+                indexes.pop();
+                currArea =  indexes.empty()
+                            ? A[popedIndex] * i
+                            : A[popedIndex] * (i - 1 - indexes.top());
+                    
+                maxArea = max(maxArea, currArea);    
             }
-            IndexStack.push(i);
         }
     }
+    
+    while(!indexes.empty())
+    {
+        int popedIndex = indexes.top();
+        indexes.pop();
+        currArea =  indexes.empty()
+                    ? A[popedIndex] * i
+                    : A[popedIndex] * (i - 1 - indexes.top());
+                    
+        maxArea = max(maxArea, currArea);  
+    }
+    
     return maxArea;
 }
