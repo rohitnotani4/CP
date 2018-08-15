@@ -20,5 +20,8 @@
         https://stackoverflow.com/questions/8031939/finding-maximum-for-every-window-of-size-k-in-an-array
 
 4.  Rain water trapped *****IMP*****
-    - 
+    - https://www.geeksforgeeks.org/trapping-rain-water/
     - Refer : https://www.youtube.com/watch?v=KV-Eq3wYjxI
+
+5.  Largest Rectangle Histogram
+    - Refer: https://www.youtube.com/watch?v=RVIh0snn4Qc
