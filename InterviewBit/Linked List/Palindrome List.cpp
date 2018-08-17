@@ -1,7 +1,3 @@
-/*
-https://www.interviewbit.com/problems/palindrome-list/
-*/
-
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -23,48 +19,60 @@ https://www.interviewbit.com/problems/palindrome-list/
  * 
  * @Output Integer
  */
- 
-listnode* originalHead = NULL;
-int half = 0, findIfHalf=0;
-void Reverse(listnode* newHead, int *ansPointer, int *countPointer)
+
+listnode* reverseList(listnode* head)
 {
-    (*countPointer)++;
-	if (newHead->next == NULL)
-	{
-		half = (*countPointer) / 2;
-		return;
-	}
-	Reverse(newHead->next,ansPointer, countPointer);
-	if (findIfHalf < half)
-	{
-		if (originalHead->val == newHead->next->val)
-			(*ansPointer) &= 1;
-		else
-			(*ansPointer) &= 0;
-		listnode * temp = newHead->next; // temp = head
-		temp->next = newHead;
-		newHead->next = NULL;
-		originalHead = originalHead->next;
-	}
-	
-	findIfHalf++;
-	// printf("FindIfHalf = %d\n",findIfHalf);
+    listnode* curr = head;
+    listnode* prev = NULL;
+    while(curr != NULL)
+    {
+        listnode* next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
 }
- 
+
+int compareLists(listnode* firstHalfHead, listnode* secondHalfHead)
+{
+    while(firstHalfHead != NULL && secondHalfHead != NULL)
+    {
+        if(firstHalfHead->val != secondHalfHead->val)
+            return 0;
+        
+        firstHalfHead = firstHalfHead->next;
+        secondHalfHead = secondHalfHead->next;
+    }
+    return 1;
+}
+
 int lPalin(listnode* A) {
     
-    if (A == NULL)
-		return 0;
- 
-	listnode*newHead, *temp;
-	int ans = 1, count = 0;
-	int *ansPointer = &ans, *countPointer = &count;
-	originalHead = newHead = temp = A;
-	Reverse(newHead, ansPointer, countPointer);
-	
-	//This is specific for InterviewBit, clearing out all global variables
-	// Not clearing this would give different results for same output in multiple runs
-    originalHead = NULL;
-    half = 0, findIfHalf=0;
-	return ans;
+    listnode* head = A;
+    if (head == NULL)
+        return 0;
+
+    
+    // Find the middle node of list using slow and fast pointer 
+    listnode *slow = head, *fast = head;
+    while(fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    
+    listnode *firstHalfStart = head;
+    listnode *secondHalfStart = slow;
+    // If the list size is odd, then fast is not NULL and the slow pointer points to 
+    // the middle element, hence we take the slow->next which will be "head" for the 
+    // secondHalf that we have to reverse
+    if(fast != NULL)
+        secondHalfStart = slow->next;
+    
+    // Reverse the secondHalf of list
+    listnode *newHead = reverseList(secondHalfStart); 
+    
+    // Compare the values of first and second half
+    return compareLists(firstHalfStart, newHead);
 }
