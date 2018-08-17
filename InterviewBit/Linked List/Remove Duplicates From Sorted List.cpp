@@ -24,57 +24,24 @@ https://www.interviewbit.com/problems/remove-duplicates-from-sorted-list/
  * @Output head pointer of list.
  */
  
-
-
 ListNode* Solution::deleteDuplicates(ListNode* A) {
 
-    ListNode* curr, *prev, *head;
-    
     if(A == NULL)
         return A;
     
-    vector<pair<ListNode* ,bool> > trackData;
-    
-    curr = A;
-    while(curr!=NULL)
+    ListNode  *head = A, *prev = A, *curr = A->next;
+    while(curr != NULL)
     {
-        trackData.push_back(make_pair(curr,true));
+        // If the previous and current value match, we have a duplicate
+        // In this case, we simply change the "next" of prev pointer to 
+        // point to next element instead of curr element
+        // E.x: 1->1->2
+        // Here prev = 1 and curr = 1, so we make prev point to 2 directly
+        if(prev->val == curr->val)
+            prev->next = curr->next;
+        else
+            prev = prev->next; 
         curr = curr->next;
     }
-    
-    curr = trackData[0].first, prev = NULL;
-    for(int i=1;i<trackData.size();i++)
-    {
-        curr = trackData[i].first;
-        prev = trackData[i-1].first;
-        if(prev != NULL && (curr->val == prev->val))
-        {
-            trackData[i].second = false;
-            trackData[i-1].second = false;   
-            //cout<<i<<" ->false"<<" ";
-        }
-    }
-    // cout<<"\n";
-    head = NULL, curr = NULL;
-    int first = 1;
-    for(int i=0;i<trackData.size();i++)
-    {
-        if(trackData[i].second)
-        {
-            if(first)
-            {
-                head = curr = prev = trackData[i].first;
-                curr->next = prev->next = NULL;
-                first = 0;
-            }
-            else
-            {
-                curr = trackData[i].first;
-                prev->next = curr;
-                prev = curr;
-            }
-        }
-    }
-    
     return head;
 }
