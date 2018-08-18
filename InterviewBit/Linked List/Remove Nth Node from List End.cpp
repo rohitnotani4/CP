@@ -24,44 +24,40 @@ https://www.interviewbit.com/problems/remove-nth-node-from-list-end/
  * 
  * @Output head pointer of list.
  */
-listnode* removeNthFromEnd(listnode* A, int B) {
-    listnode* curr = A, *nextNext;
-    
-    if(curr==NULL)
-        return curr;
-    
-    int count=1;
-    while(curr->next != NULL)
+int findListLength(listnode* head)
+{
+    int count = 0;
+    while(head != NULL)
     {
+        head = head->next;
         count++;
-        curr = curr->next;
+    }
+    return count;
+}
+
+listnode* removeNthFromEnd(listnode* A, int B) 
+{
+    listnode* head = A;
+    if(head == NULL)
+        return head;
+        
+    int listSize = findListLength(A);
+    if(B >= listSize)
+    {
+        head = head->next;
+        return head;
     }
     
-    curr = A;
-    if(count - B > 0)
+    // Remove (listSize - B + 1)th node from front of list
+    int count = 0;
+    listnode* curr = head, *prev = NULL;
+    while(count < (listSize - B))
     {
-        int i=1;
-        while(i!= (count-B))
-        {
-            curr = curr->next;
-            i++;
-        }
-        nextNext = curr->next->next;
-        free(curr->next);
-        curr->next = nextNext;
+        prev = curr;
+        curr = curr->next;
+        count++;
     }
-    else
-    {
-        if(curr->next != NULL)
-        {
-            nextNext = curr->next;
-            free(curr);
-            curr = nextNext;
-        }
-        else
-            curr = NULL;
-            
-        return curr;    
-    }
-    return A;
+    
+    prev->next = curr->next;
+    return head;
 }
