@@ -26,48 +26,29 @@ https://www.interviewbit.com/problems/merge-two-sorted-lists/
  */
 listnode* mergeTwoLists(listnode* A, listnode* B) {
     
-    if(A == NULL)
-        return B;
-    
-    if(B == NULL)
-        return A;
-    
-    listnode* head = NULL;
-    
-    if(A->val < B->val)       
-    { 
-        head = A; 
-        A = A->next; 
-    }
-    else                        
-    { 
-        head = B; 
-        B = B->next; 
-    }
-    
-    listnode* curr = head;     // pointer to form new list
-    
+    listnode* head = listnode_new(0);
+    listnode* permanentHead = head;
+
     while(A != NULL && B != NULL)
     {
-        if(A->val < B->val)
+        if(A->val <= B->val)
         {
-            curr->next = A;
+            head->next = A;
             A = A->next;
         }
         else
         {
-            curr->next = B;
+            head->next = B;
             B = B->next;
         }
-        curr = curr->next;
+        head = head->next;
     }
     
-    if(A!=NULL)
-        curr->next = A;
-    else
-        curr->next = B;
-        
+    if(A != NULL)
+        head->next = A;
     
+    if(B != NULL)
+        head->next = B;
     
-    return head;
+    return permanentHead->next;
 }
