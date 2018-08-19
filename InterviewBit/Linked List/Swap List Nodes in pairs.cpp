@@ -23,35 +23,30 @@ https://www.interviewbit.com/problems/swap-list-nodes-in-pairs/
  * 
  * @Output head pointer of list.
  */
+ 
+listnode* swapNodes(listnode* node1, listnode* node2)
+{
+    // Eg: 1 -> 2 -> 3, swap 1 and 2
+    // Here first we first change 1->next to 3 and then 2->next to 1
+    node1->next = node2->next;
+    node2->next = node1;
+    return node2;
+}
+
 listnode* swapPairs(listnode* A) 
 {
     if(A == NULL || A->next == NULL)
         return A;
-        
-    listnode* head = A->next, *prev = A, *curr = A->next, *lastChanged = NULL;
     
-    while(prev != NULL && curr != NULL)
+    listnode* dummyNode = listnode_new(0);
+    dummyNode->next = A;
+
+    listnode* curr = dummyNode;
+    while(curr->next != NULL && curr->next->next != NULL)
     {
-        // Previous node of current 2 nodes being swapped
-        if(lastChanged != NULL)
-        {
-            lastChanged->next = curr;
-        }
-        
-        // Swap prev and current nodes    
-        listnode* temp = curr->next;
-        curr->next = prev;
-        prev->next = temp;
-        lastChanged = prev;
-        
-        
-        // Check if we have 2 more nodes ahead
-        if(prev->next == NULL || prev->next->next == NULL)
-            return head;
-        
-        // Change both pointers (prev and next) to nodes ahead
-        prev = prev->next;
-        curr = prev->next;
+        curr->next = swapNodes(curr->next, curr->next->next);
+        curr = curr->next->next;
     }
-    return head;   
+
+    return dummyNode->next;
 }
