@@ -1,0 +1,7 @@
+1.  2 Sum
+    - Store each distinct element of array in an unordered_map, and check "target - currElement" in this map is each iteration.
+    - Since we iterate from 0 to Size, saving only the first index for any distinct element will ensure it's minimal index 
+    
+2.  4 Sum 
+    - An extension of 3 Sum problem (solved in Two Pointers) 
+    - Handle duplicates
