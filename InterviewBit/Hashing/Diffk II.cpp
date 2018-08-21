@@ -1,28 +1,27 @@
 /*
 https://www.interviewbit.com/problems/diffk-ii/
 */
-
-nt Solution::diffPossible(const vector<int> &A, int B) {
+int Solution::diffPossible(const vector<int> &A, int B) {
     // Do not write main() function.
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
     unordered_map<int, int> hashTable;
-    
     int difference = B;
-    for(int i=0;i<A.size();i++)
+    for(int index=0;index<A.size();index++)
     {
-        if(hashTable.find(difference + A[i]) != hashTable.end() ||
-          (hashTable.find(A[i] - difference) != hashTable.end()))
-        {
+        // To find A[i] - A[j] = B implies A[i] = A[j] + B || A[j] = A[i] - B
+        int ai = A[index] + B;
+        int aj = A[index] - B;
+        
+        if(hashTable.find(ai) != hashTable.end())
             return 1;
-        }
-        else
-        {
-            hashTable[A[i]] = i;
-        }
-    
+        
+        if(hashTable.find(aj) != hashTable.end())
+            return 1;
+       
+        hashTable[A[index]] = index;
     }
     return 0;
 }
