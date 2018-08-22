@@ -2,19 +2,6 @@
 https://www.interviewbit.com/problems/longest-substring-without-repeat/
 */
 
-int checkMaxSubstring(int *count,char currentChar)
-{
-    int j = ((int)currentChar);
-    if(count[j] >= 1)
-    {
-        return 1; // cout<<"Reset !!!"<<"\n";
-    }
-    else
-        count[j]++;
-    
-    return 0;
-}
-
 int Solution::lengthOfLongestSubstring(string A) 
 {
     // Do not write main() function.
@@ -22,22 +9,18 @@ int Solution::lengthOfLongestSubstring(string A)
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    int maxLen = 0;
-    for(int i=0,j;i<A.size();i++)
+    unordered_map<char,int> duplicateChar;
+    int start =0, end = 0, maxLen = 0;
+    while(start <= end && end < A.size())
     {
-        int count[128] = {0}, reset = 0, currLen = 0;
-
-        j=i;
-        while(j < A.size() && !reset)
+        duplicateChar[A[end]]++;
+        while(start <= end && duplicateChar[A[end]] > 1)
         {
-            reset = checkMaxSubstring(count, A[j]);
-            if(reset)
-                break;
-            currLen += 1;
-            j++;
+            duplicateChar[A[start]]--;
+            start++;
         }
-        maxLen = currLen > maxLen ? currLen : maxLen;
+        end++;
+        maxLen = max(maxLen, end - start);
     }
-    
     return maxLen;
 }
