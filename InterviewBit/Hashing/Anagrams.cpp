@@ -11,19 +11,12 @@ vector<vector<int> > Solution::anagrams(const vector<string> &A)
     
     unordered_map<string, vector<int> > hashTable;
     vector<vector<int> > ans;
-    vector<string> sortedInput;
 
     for(int i=0;i<A.size();i++)
     {
-        string temp ="";
-        temp.append(A[i]);
-        sort(temp.begin(),temp.end());
-        sortedInput.push_back(temp);
-    }
-    
-    for(int i=0;i<sortedInput.size();i++)
-    {
-        hashTable[sortedInput[i]].push_back(i+1);
+        string currWord = A[i];
+        sort(currWord.begin(),currWord.end());
+        hashTable[currWord].push_back(i+1);
     }
     
     auto it = hashTable.begin();
@@ -32,6 +25,5 @@ vector<vector<int> > Solution::anagrams(const vector<string> &A)
         ans.push_back(it->second);
         it++;
     }
-    // ans = pairs;
     return ans;
 }
