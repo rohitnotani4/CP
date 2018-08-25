@@ -5,3 +5,17 @@
 2.  4 Sum 
     - An extension of 3 Sum problem (solved in Two Pointers) 
     - Handle duplicates
+
+3.  Equal (A+B = C+D) 
+    - Brute force O(N^4)
+    - Maintain a unordered map for (A+B)
+    - Run 2 nested loop - i to n-1, j=i+1 to n and check the if the sum A+B already exists, check if the solution is valid and 
+     if it is valid, store the two pairs in the result list
+    - Sort the list and return the first element
+
+4.  Copy List
+    - O(n) extra space solution
+    - Use an unordered_map to store the old to new node mapping
+    - Copy the next and random pointers for the new nodes using this map
+    
+    --
