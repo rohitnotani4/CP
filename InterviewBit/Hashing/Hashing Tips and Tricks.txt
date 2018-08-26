@@ -23,4 +23,5 @@
         - Copy the random links: for each new node n’, n’.random = n.random.next
         - Detach the list: basically n.next = n.next.next; n’.next = n’.next.next
       
-    
+5.  Largest Continuous Sequence Zero Sum, Subarray Sum Equals K (K can be anything)
+    - https://stackoverflow.com/questions/5534063/zero-sum-subarray
