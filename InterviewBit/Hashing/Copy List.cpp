@@ -12,25 +12,50 @@ https://www.interviewbit.com/problems/copy-list/
  */
 RandomListNode* Solution::copyRandomList(RandomListNode* A) 
 {
-    RandomListNode* head = A;
-    if(head == NULL)
-            return head;
-        
-    unordered_map<RandomListNode*,RandomListNode*> randomPointerMap;
-    RandomListNode* curr = head;
+    RandomListNode* curr = A, *next = NULL;
+    if(curr == NULL)
+        return NULL;
+
+    // Create copy of each node and attach it beside the same node
+    // Ex. : A->B->C changes to A->A'->B->B'->C->C'
     while(curr != NULL)
     {
-        randomPointerMap[curr] = new RandomListNode(curr->label);
-        curr = curr->next;
+        next = curr->next;
+        RandomListNode* newNode = new RandomListNode(curr->label);
+        curr->next = newNode; // A->A'
+        newNode->next = next; // A'->B
+        curr = next;
     }
     
-    curr = head;
-    while(curr!=NULL)
+    curr = A;
+    // Assign the random pointers in the same way
+    while(curr != NULL)
     {
-        RandomListNode* temp = randomPointerMap[curr];
-        temp->next = randomPointerMap[curr->next];
-        temp->random = randomPointerMap[curr->random];
-        curr = curr->next;
+        if(curr->random != NULL)
+        {
+            curr->next->random = curr->random->next;
+        }
+        curr = curr->next->next;
     }
-    return randomPointerMap[head];       
+    
+    // Detach the original list i.e A->A'->B->B'->C->C' becomes A'->B'->C'
+    RandomListNode* originalNode = A, *copy = NULL, *finalHead;
+    RandomListNode* dummyNode = new RandomListNode(0);
+    finalHead = dummyNode;
+    while(originalNode != NULL)
+    {
+        next = originalNode->next->next; // next = B
+        
+        // Extract the copy 
+        copy = originalNode->next; // A'
+        dummyNode->next = copy; // A'->next
+        dummyNode = copy; // A'
+
+        // restore the original list
+        originalNode->next = next; // A->A'->B to A->B
+
+        originalNode = next; // B
+    }
+    
+    return finalHead->next;
 }
