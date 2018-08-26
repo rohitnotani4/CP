@@ -14,8 +14,13 @@
     - Sort the list and return the first element
 
 4.  Copy List
-    - O(n) extra space solution
-    - Use an unordered_map to store the old to new node mapping
-    - Copy the next and random pointers for the new nodes using this map
+    - Using Map
+        - Use an unordered_map to store the old to new node mapping
+        - Copy the next and random pointers for the new nodes using this map
     
-    --
+    -Without Map (Using 2 traversals of the list)
+        - Create a new node for each existing node and join them together eg: A->B->C will be A->A’->B->B’->C->C’
+        - Copy the random links: for each new node n’, n’.random = n.random.next
+        - Detach the list: basically n.next = n.next.next; n’.next = n’.next.next
+      
+    
