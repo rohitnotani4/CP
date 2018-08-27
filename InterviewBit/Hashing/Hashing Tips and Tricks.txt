@@ -25,3 +25,8 @@
       
 5.  Largest Continuous Sequence Zero Sum, Subarray Sum Equals K (K can be anything)
     - https://stackoverflow.com/questions/5534063/zero-sum-subarray
+
+6.  Window String - (find the minimum window in S which will contain all the characters in T)
+    - Use 2 pointers and hashing (Store pattern and string in different maps)
+    - Start start = 0, end = 0 and move the end pointer till S contains all characters in T. Once found increase start
+      to shrink the window size and check if the window is still valid
