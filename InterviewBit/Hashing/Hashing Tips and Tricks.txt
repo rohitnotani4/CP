@@ -30,3 +30,11 @@
     - Use 2 pointers and hashing (Store pattern and string in different maps)
     - Start start = 0, end = 0 and move the end pointer till S contains all characters in T. Once found increase start
       to shrink the window size and check if the window is still valid
+
+7.  Fraction 
+    - An implementation problem, just consider the edge cases
+    - Check if numerator > 0, check if any number is = INT_MIN/INT_MAX, check sign of both numbers
+    - To find the repeating pattern, store each remainder as key and current result size as value
+    - If a remainder exists in the map, that means the fractional part is repeating
+    
+8.  
