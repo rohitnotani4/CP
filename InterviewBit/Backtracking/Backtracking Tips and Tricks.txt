@@ -1,1 +1,4 @@
-
+1.  Subset II 
+    - Handle duplicates
+    - Rest is same as Subset problem. Apply Choose -- Explore remaining decisions -- Un-Choose
+    
