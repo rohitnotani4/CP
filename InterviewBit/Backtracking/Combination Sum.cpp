@@ -1,49 +1,47 @@
 /*
-
+https://www.interviewbit.com/problems/combination-sum/
 */
 
-bool calculateSumRecursively
-(vector<vector<int> >& ans,vector<int>& temp, set<int>& input, int sum,int target, int *prev)
+void combinationSumHelper(vector<vector<int> >& result,vector<int>& chosen, vector<int>& input,int index, int currentSum,int target)
 {
-    if(sum==target)
+    if(currentSum > target)
     {
-        return true;
+        return ;
     }
     
-    if(sum < target)
+    if(currentSum==target)
     {
-        for(set<int>::iterator it=input.begin(); it!=input.end(); ++it)   
-        {
-            if(*it >= *prev)
-            {
-                *prev = (*it);
-                temp.push_back(*it);
-                sum += (*it);
-                if(calculateSumRecursively(ans,temp,input,sum,target,prev))
-                    ans.push_back(temp);
-                temp.pop_back();
-                sum -= (*it);
-            }
-        }
-        *prev = -1;
+        result.push_back(chosen);
+        return ;
     }
-    return false;
+    
+    for(int i = index;i<input.size();i++)
+    {
+        chosen.push_back(input[i]);
+        currentSum += input[i];
+            
+        combinationSumHelper(result,chosen,input,i,currentSum,target);
+            
+        chosen.pop_back();
+        currentSum -= input[i];
+    }
 }
- 
+
 vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
     // Do not write main() function.
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
-    int prev = -1;
-    vector<int> temp;
-    vector<vector<int> > ans;
-    set<int> uniqueElements;
+    vector<int> chosen, uniqueElements;
+    vector<vector<int> > result;
+    sort(A.begin(), A.end());
     
     for(int i=0;i<A.size();i++)
-        uniqueElements.insert(A[i]);
+    {
+        if(i==0 || A[i] != A[i-1])
+            uniqueElements.push_back(A[i]);
+    }
         
-    calculateSumRecursively(ans,temp,uniqueElements,0,B,&prev);
-    return ans;  
-    
+    combinationSumHelper(result,chosen,uniqueElements,0,0,B);
+    return result; 
 }
