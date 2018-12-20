@@ -2,42 +2,43 @@
 https://www.interviewbit.com/problems/permutations/
 */
 
-bool getAllPermutations(vector<vector<int> >& ans,unordered_set<int>& temp, vector<int>& A, 
-int currentIndex)
+void permuteHelper(vector<vector<int> >& result, vector<int> input, vector<int> chosen, int index)
 {
-    if(temp.size() == A.size())
-        return true;
-    
-    if(temp.size() < A.size())
+    if(input.size() == 0)
     {
-        for(int j=0;j<A.size();j++)
-        {
-            if(temp.count(A[j]) == 0)
-            {
-                temp.insert(A[j]);
-                if(getAllPermutations(ans,temp,A,j+1))
-                {
-                    vector<int> oneRow;
-                    for(unordered_set<int>::iterator it=temp.begin(); it!=temp.end(); ++it)
-                        oneRow.push_back(*it);
-                    
-                    ans.push_back(oneRow);
-                }
-                temp.erase(A[j]);
-            }
-        }
+        result.push_back(chosen);
     }
-    return false;
+    else
+    {
+        int size = input.size();
+        for(int i = 0;i<size;i++)
+        {
+            // Choose
+            chosen.push_back(input[i]);
+            int value =  input[i];
+            vector<int>::iterator it;
+            it = input.begin() + i;
+            input.erase(it);
+            
+            permuteHelper(result, input, chosen, i);
+            
+            //Un-Chose
+            input.insert(it, value);
+            chosen.pop_back();
+        }    
+    }
 }
- 
 vector<vector<int> > Solution::permute(vector<int> &A) {
     // Do not write main() function.
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
-    vector<vector<int>> ans;
-    unordered_set<int> temp;
- 
-    getAllPermutations(ans, temp,A,0);    
-    return ans;
+       
+    vector<vector<int> > result;
+    vector<int> chosen;
+    if (A.size() == 0)
+        return result;
+    sort(A.begin(), A.end());
+    permuteHelper(result, A, chosen, 0);
+    return result;
 }
