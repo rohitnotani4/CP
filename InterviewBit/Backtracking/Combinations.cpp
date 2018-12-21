@@ -28,6 +28,6 @@ vector<vector<int> > Solution::combine(int n, int k) {
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     vector<int> chosen;
     vector<vector<int> > result;
-    combinationsHelper(result,chosen,n,1,k);
+    combinationsHelper(result, chosen, n, 1, k);
     return result;   
 }
