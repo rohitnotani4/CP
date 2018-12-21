@@ -5,9 +5,7 @@ https://www.interviewbit.com/problems/combination-sum/
 void combinationSumHelper(vector<vector<int> >& result,vector<int>& chosen, vector<int>& input,int index, int currentSum,int target)
 {
     if(currentSum > target)
-    {
         return ;
-    }
     
     if(currentSum==target)
     {
