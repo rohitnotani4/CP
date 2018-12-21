@@ -1,4 +1,16 @@
-1.  Subset II 
+1.  Subset and Subset II 
     - Handle duplicates
     - Rest is same as Subset problem. Apply Choose -- Explore remaining decisions -- Un-Choose
     
+2.  Permutations and Combinations
+    - Chose - UnChose. Use vector for chosen elements.
+    
+3.  Combination Sum and Combination Sum II
+    - Same
+
+4. Letter Phone
+    - Can be reduced to previous questions like (Subset, Permutations etc)
+    - We have to chose n (number of integers) characters and for each integer we may 1/2/4 choices 
+    - Store int to string map and iterate for each index based on the string obtained by the int at the index
+    
+5. 
