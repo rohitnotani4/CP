@@ -2,26 +2,24 @@
 https://www.interviewbit.com/problems/letter-phone/
 */
 
-bool solveRecursively
-(vector<string>& ans,string& temp,map<char, string>& digitToChars,int currentIndex,string& A)
+void letterCombinationsHelper(vector<string>& result, string& chosen, map<char, string>& digitToChars, int currIndex, string& input)
 {
-    if(temp.size() == A.size())
-        return true;
-        
-    if(temp.size() < A.size())
+    if(chosen.size() == input.size())
     {
-        string mappedString = digitToChars[A[currentIndex]];
-        for(int j=0;j<mappedString.size();j++)
-        {
-            temp.push_back(mappedString[j]);
-            if(solveRecursively(ans,temp,digitToChars,currentIndex+1,A))
-                ans.push_back(temp);
-            temp.pop_back();    
-        }
-    } 
-    return false;
+        result.push_back(chosen);
+        return ;
+    }
+    
+    string phoneChars = digitToChars[input[currIndex]];
+    for(int i = 0;i<phoneChars.length();i++)
+    {
+        chosen.push_back(phoneChars[i]);
+        
+        letterCombinationsHelper(result, chosen, digitToChars, currIndex + 1, input);
+        
+        chosen.pop_back();
+    }
 }
-
 
 vector<string> Solution::letterCombinations(string A) 
 {
@@ -29,8 +27,8 @@ vector<string> Solution::letterCombinations(string A)
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
-    vector<string> ans;
-    string temp;
+    vector<string> result;
+    string chosen;
     map<char, string> digitToChars;
     digitToChars['0'] = string("0");
     digitToChars['1'] = string("1");
@@ -43,6 +41,6 @@ vector<string> Solution::letterCombinations(string A)
     digitToChars['8'] = string("tuv");
     digitToChars['9'] = string("wxyz");
     
-    solveRecursively(ans,temp,digitToChars,0,A);
-    return ans;
+    letterCombinationsHelper(result,chosen,digitToChars,0,A);
+    return result;
 }
