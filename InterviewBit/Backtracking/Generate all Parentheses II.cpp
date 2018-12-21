@@ -2,47 +2,35 @@
 https://www.interviewbit.com/problems/generate-all-parentheses-ii/
 */
 
-bool isValid(string& temp)
-{
-    stack<char> st;
-    
-    for(int i=0;i<temp.size();i++)
-    {
-        if(temp[i]=='(')
-            st.push(temp[i]);
-        else
-        {
-            if(st.empty() || st.top()==')')
-                return false;
-            
-            st.pop();
-        }
-    }
-    
-    if(st.empty())
-        return true;
-        
-    return false;
-}
 
-
-bool addParanthesisRecursively(vector<string>& ans,string& temp,int n)
+void generateParenthesisHelper(vector<string>& result,string& chosen,int openBrackets, int closedBrackets, int totalBrackets)
 {
-    if(temp.size() == (2*n) && isValid(temp))
-        return true;
-    
-    if(temp.size() < 2*n)
-    {
-        for(int i=0;i<2;i++)
-        {
-            char paranthesis = i+40;
-            temp.push_back(paranthesis);
-            if(addParanthesisRecursively(ans,temp,n))
-                ans.push_back(temp);
-            temp.pop_back(); 
-        }
-    }
-    return false;
+   if(openBrackets == closedBrackets && openBrackets + closedBrackets == totalBrackets)
+   {
+       result.push_back(chosen);
+       return ;
+   }
+   
+   if(openBrackets > totalBrackets/2 || closedBrackets > totalBrackets/2)
+   {
+       return ;
+   }
+   
+   if(closedBrackets > openBrackets)
+   {
+       return ;
+   }
+   
+   for(int i=0;i<2;i++)
+   {
+       i == 0 ? openBrackets++ : closedBrackets++;
+       chosen.push_back(char(i+40)); // ASCII for '(' is 40 and ')' is 41
+       
+       generateParenthesisHelper(result, chosen, openBrackets, closedBrackets, totalBrackets);
+       
+       chosen.pop_back();
+       i == 0 ? openBrackets-- : closedBrackets--;
+   }
 }
 
 vector<string> Solution::generateParenthesis(int A) 
@@ -52,8 +40,8 @@ vector<string> Solution::generateParenthesis(int A)
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
 
-    vector<string> ans;
-    string temp;
-    addParanthesisRecursively(ans,temp,A);
-    return ans;
+    vector<string> result;
+    string chosen;
+    generateParenthesisHelper(result,chosen,0,0,2*A);
+    return result;
 }
