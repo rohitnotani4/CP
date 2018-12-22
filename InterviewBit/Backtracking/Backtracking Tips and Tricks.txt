@@ -13,4 +13,14 @@
     - We have to chose n (number of integers) characters and for each integer we may 1/2/4 choices 
     - Store int to string map and iterate for each index based on the string obtained by the int at the index
     
-5. 
+5. Generate all Parentheses II
+    - Same
+    - A valid parenthesis combination is one in which at any point closed brackets should not be more than open brackets.
+
+6. Gray Code
+    - Let G(n) represent a gray code of n bits. Note that reverse of G(n) is also a valid sequence. Let R(n) denote the reverse of G(n).
+    - We can construct 
+        G(n+1) as the following : 
+        0G(n) 
+        1R(n)
+      Where 0G(n) means all elements of G(n) prefixed with 0 bit and 1R(n) means all elements of R(n) prefixed with 1. 
