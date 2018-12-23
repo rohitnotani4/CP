@@ -8,19 +8,28 @@
 3.  Combination Sum and Combination Sum II
     - Same
 
-4. Letter Phone
+4.  Letter Phone
     - Can be reduced to previous questions like (Subset, Permutations etc)
     - We have to chose n (number of integers) characters and for each integer we may 1/2/4 choices 
     - Store int to string map and iterate for each index based on the string obtained by the int at the index
     
-5. Generate all Parentheses II
+5.  Generate all Parentheses II
     - Same
     - A valid parenthesis combination is one in which at any point closed brackets should not be more than open brackets.
 
-6. Gray Code
+6.  Gray Code
     - Let G(n) represent a gray code of n bits. Note that reverse of G(n) is also a valid sequence. Let R(n) denote the reverse of G(n).
     - We can construct 
         G(n+1) as the following : 
         0G(n) 
         1R(n)
       Where 0G(n) means all elements of G(n) prefixed with 0 bit and 1R(n) means all elements of R(n) prefixed with 1. 
+      
+7.  Palindrome Partitioning
+    - https://leetcode.com/problems/palindrome-partitioning/discuss/41964/Clean-C%2B%2B-backtracking-solution
+    
+8.  Kth Permutation Sequence
+    - https://leetcode.com/problems/permutation-sequence/discuss/22507/%22Explain-like-I'm-five%22-Java-Solution-in-O(n)
+    
+9.  NQueens
+    - https://www.youtube.com/watch?v=xouin83ebxE&list=PLrmLmBdmIlpslxZUHHWmfOzNn6cA7jvyh&index=2
