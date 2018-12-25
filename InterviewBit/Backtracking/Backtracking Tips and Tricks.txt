@@ -33,3 +33,6 @@
     
 9.  NQueens
     - https://www.youtube.com/watch?v=xouin83ebxE&list=PLrmLmBdmIlpslxZUHHWmfOzNn6cA7jvyh&index=2
+    
+10. Sudoku
+    - https://www.youtube.com/watch?v=NuodN41aK3g&t=516s
