@@ -10,26 +10,13 @@ https://www.interviewbit.com/problems/merge-k-sorted-lists/
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
- 
-struct CustomStruct
-{
-    int value;
-    int ListNo;
-    ListNode* nextNode;
-    
-    CustomStruct(int val, int listno, ListNode* node)
-    {
-        value = val;
-        ListNo = listno;
-        nextNode = node;
-    }
-};
- 
-struct compare  
+
+
+struct CompareNode 
 {  
-    bool operator()(CustomStruct l, CustomStruct r)  
+    bool operator()(ListNode* const & p1, ListNode* const & p2)  
     {  
-       return l.value > r.value;  
+       return p1->val > p2->val;  
     } 
 };  
  
@@ -39,41 +26,28 @@ ListNode* Solution::mergeKLists(vector<ListNode*> &A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    priority_queue<CustomStruct, vector<CustomStruct>, compare> minQueue;
-    
-    ListNode* head=NULL, *curr = NULL;
+    priority_queue<ListNode*, vector<ListNode*>, CompareNode> minQueue;
     
     for(int i=0;i<A.size();i++)
     {
-        // cout<<"Pushed "<<A[i]->val<<" to queue"<<"\n";
-        minQueue.push(CustomStruct(A[i]->val,i,A[i]));
+        if(A[i] != NULL)
+        {
+            minQueue.push(A[i]);    
+        }
     }
     
-    ListNode* newNode = new ListNode(0);
-    curr = newNode;
+    ListNode* curr = new ListNode(0);
+    ListNode* head = curr;
     while(!minQueue.empty())
     {
-        CustomStruct currentMin = minQueue.top();
+        curr->next = minQueue.top();
         minQueue.pop();
-        // cout<<"Poped Element "<<currentMin.first.first<<"\n";
         
-        newNode = new ListNode(currentMin.value);
-        
-        if(head==NULL)
-            head = newNode;
-        
-        curr->next = newNode;
-        // cout<<"newNode Address = "<<curr<<"\n";
-        
-        if(currentMin.nextNode->next != NULL)
-        {
-            minQueue.push(CustomStruct(currentMin.nextNode->next->val,currentMin.ListNo,currentMin.nextNode->next));
-        
-        // cout<<"Value = "<<curr->next->val<<" Index = "<<currentMin.first.second
-        // <<" Address "<<currentMin.second->next<<"\n";
-        }
         curr = curr->next;
+        if(curr->next != NULL)
+        {
+            minQueue.push(curr->next);
+        }
     }
-    
-    return head;
+    return head->next;
 }
