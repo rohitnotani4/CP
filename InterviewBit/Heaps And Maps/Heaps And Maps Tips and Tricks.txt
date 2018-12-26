@@ -1,0 +1,3 @@
+1.  Merge K Sorted Lists
+  - Use priority queue to store K elements, one from each list
+  - By default priority stores largest element first, pass the custom compare function to store in ascending order 
