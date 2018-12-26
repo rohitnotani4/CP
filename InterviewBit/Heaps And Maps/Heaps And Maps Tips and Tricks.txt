@@ -1,3 +1,8 @@
 1.  Merge K Sorted Lists
   - Use priority queue to store K elements, one from each list
   - By default priority stores largest element first, pass the custom compare function to store in ascending order 
+
+2.  Distinct Numbers In Window
+  - Use dictonary to store count of each number for each window of size K
+  - Increase count of currentIndex element in dictonary and decrease count of (currentIndex - K)th element in dictonary. If count reaches  to zero delete the element from dictonary.
+  - Current size of dictonary is number of distinct numbers for that window.
