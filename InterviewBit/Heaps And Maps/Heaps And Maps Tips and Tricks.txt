@@ -6,3 +6,29 @@
   - Use dictonary to store count of each number for each window of size K
   - Increase count of currentIndex element in dictonary and decrease count of (currentIndex - K)th element in dictonary. If count reaches  to zero delete the element from dictonary.
   - Current size of dictonary is number of distinct numbers for that window.
+
+3.  LRU Cache
+  - https://leetcode.com/problems/lru-cache/discuss/45976/C%2B%2B11-code-74ms-Hash-table-%2B-List
+  - https://www.youtube.com/watch?v=8-FZRAjR7qU&t=1s
+  - Rough work :
+      cache = map -> <key, <value, listPointer>
+      list <key>  -> 1 2 3
+
+      get --
+        find in cache
+        if key not present return -1;
+
+        if key already present, move the value to front
+
+          MovetoFrontLogic()
+          {
+            key = it->first;										
+            list.erase(it->second.second); // Use the iterator stored  Removes the element from list
+            list.push_front(key); // Pushes the key at front of list 
+            it->second.second =  list.begin(); // Update the pointer of this value in map		
+          }	
+
+      set -- 
+        if key already present, move the value to front
+
+        if not present 
