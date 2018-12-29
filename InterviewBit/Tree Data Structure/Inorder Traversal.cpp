@@ -17,41 +17,28 @@ vector<int> Solution::inorderTraversal(TreeNode* A)
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    vector<int> result;
     
-    int complete = 0;
-    vector<int> ans;
-    if(A==NULL)
-        return ans;
-        
-    stack<TreeNode*> st;    
-    TreeNode* curr = A;
+    if (A == NULL)
+        return result;
     
-    while(!complete)
+    TreeNode* curr = A;    
+    stack<TreeNode*> inorderStack;
+    while(!inorderStack.empty() || curr != NULL)
     {
         if(curr != NULL)
         {
-            st.push(curr);  
-            // cout<<"Curr = "<<curr<<" Value = "<<curr->val<<" Right = "<<curr->right<<"\n";
-            curr = curr->left; 
+            inorderStack.push(curr);
+            curr = curr->left;
         }
         else
         {
-            if(!st.empty())
-            {
-                if(!st.top()->right)
-                    curr = NULL;
-                else
-                    curr = st.top()->right;
-                    
-                // cout<<"Stack Top = "<<st.top()<<" Value = "<<st.top()->val<<" Right = "<<st.top()->right<<"\n";
-                ans.push_back(st.top()->val);
-                st.pop();
-            }
-            else
-                complete = 1;
+            curr = inorderStack.top();
+            result.push_back(curr->val);
+            inorderStack.pop();
+            curr = curr->right;
         }
-        
-            
     }
-    return ans;   
+    
+    return result;
 }
