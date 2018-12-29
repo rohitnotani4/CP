@@ -18,30 +18,25 @@ vector<int> Solution::postorderTraversal(TreeNode* A)
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    vector<int> ans;
+    vector<int> result;
     if(A==NULL)
-        return ans;
+        return result;
         
-    stack<TreeNode*> firstStack, secondStack;
-    
-    firstStack.push(A);
-    while(!firstStack.empty())
+    stack<TreeNode*> nodes;
+    TreeNode* curr = A;
+    nodes.push(curr);
+    while(!nodes.empty())
     {
-        TreeNode* curr = firstStack.top();
-        firstStack.pop();
-        secondStack.push(curr);
+        curr = nodes.top();
+        nodes.pop();
+        result.push_back(curr->val);
         
         if(curr->left != NULL)
-            firstStack.push(curr->left);
+            nodes.push(curr->left);
+            
         if(curr->right != NULL)
-            firstStack.push(curr->right);
+            nodes.push(curr->right);
     }
-    
-    while(!secondStack.empty())
-    {
-        ans.push_back(secondStack.top()->val);
-        secondStack.pop();
-    }
-    
-    return ans;
+    reverse(result.begin(), result.end());
+    return result;
 }
