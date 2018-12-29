@@ -1,0 +1,4 @@
+1. Iterative - Inorder, PreOrder and Postorder
+  - Use stack to mimic recursion 
+  - Inorder --> Push root to stack, change root to root->left, if root is null, pop the top element and print, change root to top->right
+  - Preorder --> Pop from stack and print. If top->right is not null, add it to stack, If top->left is not null, add it to stack
