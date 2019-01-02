@@ -8,3 +8,5 @@
       --> Use two stacks or below method
       --> The same logic for PreOrder with a little modification i.e. Add Left Child Before Right Child will give the order which is reverse of expected postorder.  Reverse this to get the expected solution. 
   
+2.  Zig Zag Level Order Traversal Bt 
+  - Use the same logic for as for Level order traversal. Just swap the output for alternating rows.
