@@ -10,3 +10,19 @@
   
 2.  Zig Zag Level Order Traversal Bt 
   - Use the same logic for as for Level order traversal. Just swap the output for alternating rows.
+
+3.  Vertical Order traversal of Binary Tree
+  - Do level order, root will have horizontal distance = 0, for left child hd = parent.hd - 1 and for right child hd = parent.hd + 1
+  - Store this in a map with hd as key.
+  
+4.  Path Sum, Root to Leaf Paths With Sum
+  - if root is null return , else if leaf node check for sum, if sum matches add it to result
+  - left || right
+  
+5.  Max Depth Of Binary Tree
+  - if root is null return 0
+  - 1 + max(leftDepth, rightDepth)
+  
+6.  Min Depth Of Binary Tree 
+  -
+  - Can use BFS
