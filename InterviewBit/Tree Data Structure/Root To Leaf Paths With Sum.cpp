@@ -12,26 +12,23 @@ https://www.interviewbit.com/problems/root-to-leaf-paths-with-sum/
  * };
  */
  
-void solve(TreeNode* root,int currentSum,int target,
-vector<int>& path, vector<vector<int> >& paths)
+void solve(TreeNode* root,int currentSum,int target, vector<int>& path, vector<vector<int> >& paths)
 {
-    if(root == NULL) //&& currentSum = target
-        return;
+    if(root == NULL) 
+        return ;
     
-    if(root->left == NULL && root->right==NULL)
+    path.push_back(root->val);
+    
+    if(root->left == NULL && root->right == NULL)
     {
-        if(currentSum+root->val == target)
+        if (currentSum + root->val == target)
         {
-            path.push_back(root->val);
             paths.push_back(path);
-            path.pop_back();
         }
-        return;
     }
     
-    path.push_back(root->val);  
-    solve(root->left,currentSum+root->val,target,path,paths);
-    solve(root->right,currentSum+root->val,target,path,paths);
+    solve(root->left, currentSum + root->val, target, path, paths);
+    solve(root->right, currentSum + root->val, target, path, paths);
     path.pop_back();
 }
  
