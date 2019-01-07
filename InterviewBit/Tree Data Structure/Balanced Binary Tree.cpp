@@ -12,15 +12,31 @@ https://www.interviewbit.com/problems/balanced-binary-tree/
  * };
  */
  
-int depth(TreeNode* A)
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ 
+int balancedHeight(TreeNode* node)
 {
-    if(A==NULL)
+    if (node == NULL)
         return 0;
+        
+    int leftHeight = balancedHeight(node->left);
+    int rightHeight = balancedHeight(node->right);
     
-    int leftHeight = depth(A->left);
-    int rightHeight = depth(A->right);
+    if (leftHeight == -1 || rightHeight == -1)
+        return -1;
+        
+    if (abs (leftHeight - rightHeight) > 1)
+        return -1;
     
-    return 1 + max(leftHeight,rightHeight);
+    return max(leftHeight, rightHeight) + 1;
 }
 
 int Solution::isBalanced(TreeNode* A) {
@@ -29,13 +45,7 @@ int Solution::isBalanced(TreeNode* A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    if(A==NULL)
-        return 1;
-        
-    int leftDepth = depth(A->left);
-    int rightDepth = depth(A->right);
-    
-    if(abs(leftDepth - rightDepth) <=1 && isBalanced(A->left) && isBalanced(A->right))
+    if (balancedHeight (A) != -1)
         return 1;
     return 0;
 }
