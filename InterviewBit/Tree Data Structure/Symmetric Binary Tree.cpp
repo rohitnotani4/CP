@@ -11,13 +11,13 @@ https://www.interviewbit.com/problems/symmetric-binary-tree/
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
- 
+
 int checkIfSymmetric(TreeNode* leftPart, TreeNode* rightPart)
 {
-    if(leftPart == NULL && right == NULL)
+    if(leftPart == NULL && rightPart == NULL)
         return 1;
     
-    if(leftPart == NULL || right == NULL)
+    if(leftPart == NULL || rightPart == NULL)
         return 0;
         
     return  leftPart->val == rightPart->val
@@ -34,5 +34,5 @@ int Solution::isSymmetric(TreeNode* A) {
     if(A==NULL)
         return 1;
  
-    return checkIfSymmetric(A,A);
+    return checkIfSymmetric(A->left, A->right);
 }
