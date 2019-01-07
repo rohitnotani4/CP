@@ -26,3 +26,10 @@
 6.  Min Depth Of Binary Tree 
   -
   - Can use BFS
+
+7.  Balanced Binary Tree
+  - Use recursive approach, check depth of left subtree, right subtree for each node, if difference between them is > 1, it's not balanced 
+  - Better approach O(N) - Refer
+    - https://leetcode.com/problems/balanced-binary-tree/discuss/35691/The-bottom-up-O(N)-solution-would-be-better
+    - https://www.youtube.com/watch?v=nOcFiGl5Vy4
+  
