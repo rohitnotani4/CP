@@ -33,3 +33,7 @@
     - https://leetcode.com/problems/balanced-binary-tree/discuss/35691/The-bottom-up-O(N)-solution-would-be-better
     - https://www.youtube.com/watch?v=nOcFiGl5Vy4
   
+8.  Identical Binary Trees, Symmetric Binary Tree
+  - Straightforward 
+  
+9.  
