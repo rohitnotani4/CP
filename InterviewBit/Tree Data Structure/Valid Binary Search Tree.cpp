@@ -12,22 +12,20 @@ https://www.interviewbit.com/problems/valid-binary-search-tree/
  * };
  */
  
-int checkIfValidBST(TreeNode* root, int lowerBound, int upperBound)
+int checkIfValidBST(TreeNode* root, int left, int right)
 {
-    
-    if(root==NULL)
+    if (root == NULL)   
         return 1;
-    
-    int isBST = 0;
-    if(root->val >= lowerBound && root->val < upperBound)
-        isBST = 1;
-    
-    return isBST 
-            && checkIfValidBST(root->left,lowerBound, root->val)
-            && checkIfValidBST(root->right,root->val,upperBound);
+        
+    if (root->val >= left && root->val < right)
+    {
+        return 1 
+            && checkIfValidBST(root->left, left, root->val) 
+            && checkIfValidBST(root->right, root->val, right);
+    }
+    return 0;
 }
- 
- 
+
 int Solution::isValidBST(TreeNode* A) {
     // Do not write main() function.
     // Do not read input, instead use the arguments to the function.
