@@ -36,4 +36,8 @@
 8.  Identical Binary Trees, Symmetric Binary Tree
   - Straightforward 
   
-9.  
+9.  Inorder Traversal of Cartesian Tree
+  - In each iteration find max of elements between start and end index and make that as root element, repeat for left and right subtree with corresponding start and end index
+
+10. Sorted Array To Balanced BST
+  - Start from mid, recurse for left and right subtree.
