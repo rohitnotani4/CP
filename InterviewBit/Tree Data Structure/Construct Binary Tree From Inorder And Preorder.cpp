@@ -12,29 +12,37 @@ https://www.interviewbit.com/problems/construct-binary-tree-from-inorder-and-pre
  * };
  */
  
-int findIndex(vector<int> &inorder, int i, int j, int val)
+void buildIndexMap(unordered_map<int,int>& indexMap, vector<int> &inorder)
 {
-    for (auto b = i; b<=j; ++b)
-        if (inorder[b]==val)
-            return b;
+    for(int i=0;i<inorder.size();i++)
+    {
+        indexMap[inorder[i]] = i;
+    }
 }
 
-TreeNode* makeTree(vector<int> &preorder, vector<int> &inorder, int i, int j, int& p)
+TreeNode* makeTree(vector<int> &preorder, vector<int> &inorder, unordered_map<int,int>& indexMap, int i, int j, int& p)
 {
     if (i>j)
         return NULL;
+    
     TreeNode* node = new TreeNode(preorder[p++]);
+    
     if (i==j)
         return node;
-    int in = findIndex(inorder, i, j, node->val);
-    node->left = makeTree(preorder, inorder, i, in-1, p);
-    node->right = makeTree(preorder, inorder, in+1, j, p);
+    
+    int index = indexMap[node->val];
+    node->left = makeTree(preorder, inorder, indexMap, i, index-1, p);
+    node->right = makeTree(preorder, inorder, indexMap, index+1, j, p);
     return node;
 }
 
-TreeNode* Solution::buildTree(vector<int> &preorder, vector<int> &inorder) {
+TreeNode* Solution::buildTree(vector<int> &preorder, vector<int> &inorder) {    
     if (preorder.empty() || inorder.empty())
         return NULL;
-    int p = 0;
-    return makeTree(preorder, inorder, 0, inorder.size()-1, p);
+    
+    unordered_map<int,int> indexMap;
+    buildIndexMap(indexMap, inorder);   
+    
+    int startIndex = 0, endIndex = preorder.size()-1;
+    return makeTree(preorder, inorder, indexMap, startIndex, endIndex, startIndex);
 }
