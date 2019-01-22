@@ -41,3 +41,6 @@
 
 10. Sorted Array To Balanced BST
   - Start from mid, recurse for left and right subtree.
+  
+11. Binary Tree From Inorder And Postorder
+  - The the basic idea is to take the last element in postorder array as the root, find the position of the root in the inorder array; then locate the range for left sub-tree and right sub-tree and do recursion. Use a unordered map to record the index of root in the inorder array
