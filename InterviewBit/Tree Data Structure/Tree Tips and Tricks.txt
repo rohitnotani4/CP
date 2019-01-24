@@ -44,3 +44,14 @@
   
 11. Binary Tree From Inorder And Postorder
   - The the basic idea is to take the last element in postorder array as the root, find the position of the root in the inorder array; then locate the range for left sub-tree and right sub-tree and do recursion. Use a unordered map to record the index of root in the inorder array
+  
+12. Construct Binary Tree From Inorder And Preorder
+  - Same as above.
+
+13. Kth Smallest Element In Tree
+  - Store and inorder traversal in an array and return the kth element. O(n) time and O(n) space complexity
+  - All elements smaller than root will be in the left subtree, and all elements greater than root will be in the right subtree. 
+This means we need not even explore the right subtree till we have explored everything in the left subtree. Or in other words, we go to the right subtree only when the size of left subtree + 1 ( root ) < k.
+
+
+  
