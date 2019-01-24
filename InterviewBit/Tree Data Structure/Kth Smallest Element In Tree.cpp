@@ -12,21 +12,24 @@ https://www.interviewbit.com/problems/kth-smallest-element-in-tree/
  * };
  */
  
-void InorderBST(TreeNode* root, vector<int>& allNodes)
+int InorderBST(TreeNode* root,int& k)
 {
     if(root==NULL)
-        return ;
+        return -1;
     
-    InorderBST(root->left,allNodes);
-    allNodes.push_back(root->val);
-    InorderBST(root->right,allNodes);
+    int k1 = InorderBST(root->left,k);
+    if (k == 0)
+        return k1;
+    k--;
+    if (k == 0)
+        return root->val;
+    
+    return InorderBST(root->right,k);
     
 }
- 
+
 int Solution::kthsmallest(TreeNode* root, int k) 
 {
     int count = 0;
-    vector<int> allNodes;
-    InorderBST(root,allNodes);   
-    return allNodes[k-1];
+    return InorderBST(root,k);   
 }
