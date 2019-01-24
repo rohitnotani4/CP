@@ -11,27 +11,66 @@ https://www.interviewbit.com/problems/2sum-binary-tree/
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
- 
-bool inOrderTraversal(TreeNode* A, unordered_set<int>& hashTable, int B)
-{
-    if (A == NULL)
-        return false;
-    
-   if (hashTable.find(B - (A->val)) != hashTable.end())
-        return true;
-    else
+
+class BSTIterator {
+public:
+    stack<TreeNode*> track;
+    TreeNode* node = NULL; 
+    bool forward;
+
+    BSTIterator(TreeNode *root, bool moveLeft) 
     {
-        hashTable.insert(A->val);
+        node = root;
+        forward = moveLeft;
     }
-    return inOrderTraversal(A->left, hashTable, B) || inOrderTraversal(A->right, hashTable, B);
-}
+     
+    /** @return whether we have a next smallest number */
+    bool hasNext() 
+    {
+        return node != NULL || !track.empty();
+    }
+     
+    /** @return the next smallest number */
+    int next() 
+    {
+        while(hasNext())
+        {
+            if (node != NULL)
+            {
+                track.push(node);
+                node = forward ? node->left : node->right;
+            }
+            else
+            {
+                TreeNode* top = track.top();
+                track.pop();
+                int nextVal = top->val;
+                node = forward ? top->right : top->left;
+                return nextVal;
+            }
+        }
+        return -1; // Return is required otherwise compilation error
+    } 
+};
 
 int Solution::t2Sum(TreeNode* A, int B) 
 {
-    unordered_set<int> hashTable;
     
-    if (inOrderTraversal(A, hashTable, B))
-        return 1;
+    if (A == NULL || (A->left == NULL && A->right == NULL))
+        return 0;
     
+    BSTIterator l(A, true);
+    BSTIterator r(A, false);
+    
+    for (int i = l.next(), j = r.next(); i < j;) 
+    {
+        int sum = i + j;
+        if (sum == B) 
+            return 1;
+        else if (sum < B)
+            i = l.next();
+        else
+            j = r.next();
+    }
     return 0;
 }
