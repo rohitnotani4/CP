@@ -12,36 +12,40 @@ https://www.interviewbit.com/problems/bst-iterator/
  * };
  */
  
-stack<TreeNode *> myStack;
- 
-void pushAll(TreeNode* node)
-{
-    while(node != NULL)
-    {
-        myStack.push(node);
-        node = node->left;
-    }
-}
+stack<TreeNode*> track;
+TreeNode* node = NULL; 
+
 BSTIterator::BSTIterator(TreeNode *root) 
 {
-    stack<TreeNode *> clearStack;
-    myStack.swap(clearStack);
-    pushAll(root);
+    node = root;
 }
  
 /** @return whether we have a next smallest number */
 bool BSTIterator::hasNext() 
 {
-    return !myStack.empty(); 
+    return node != NULL || !track.empty();
 }
  
 /** @return the next smallest number */
 int BSTIterator::next() 
 {
-    TreeNode *tmpNode = myStack.top();
-    myStack.pop();
-    pushAll(tmpNode->right);
-    return tmpNode->val;
+    while(hasNext())
+    {
+        if (node != NULL)
+        {
+            track.push(node);
+            node = node->left;
+        }
+        else
+        {
+            TreeNode* top = track.top();
+            track.pop();
+            int nextVal = top->val;
+            node = top->right;
+            return nextVal;
+        }
+    }
+    return -1; // Return is required otherwise compilation error
 }
  
 /**
