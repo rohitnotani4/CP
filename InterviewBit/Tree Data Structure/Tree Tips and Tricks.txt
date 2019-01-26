@@ -56,5 +56,9 @@ This means we need not even explore the right subtree till we have explored ever
 14. BST Iterator and 2 Sum Binary Tree
   - https://leetcode.com/problems/two-sum-iv-input-is-a-bst/discuss/106063/C%2B%2B-Clean-Code-O(n)-time-O(lg-n)-space-BinaryTree-Iterator
 
-
+15. Flatten Binary Tree to Linked List
+  - Find the pre-order traversal and set each node's right pointer to the next node in pre-order. Using extra memory the solution is straightforward
+  - Another simple and elegant solution, which doesn't need any extra memory or DS is given in below link:
+  https://leetcode.com/problems/flatten-binary-tree-to-linked-list/discuss/37010/Share-my-simple-NON-recursive-solution-O(1)-space-complexity!
+  - The idea in above link is a variation of Morris tree traversal 
   
