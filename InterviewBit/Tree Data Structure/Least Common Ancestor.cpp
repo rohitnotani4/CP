@@ -11,23 +11,33 @@ https://www.interviewbit.com/problems/least-common-ancestor/
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
- 
-bool PreOrderTraversal(TreeNode* A, int value,vector<int>& nodes)
+
+TreeNode* lowestCommonAncestor(TreeNode* root, int val1, int val2)
 {
-    if(A==NULL)
-        return false;
+    if(root == NULL)
+        return NULL;
+        
+    if (root->val == val1 || root->val == val2)
+        return root;
+        
+    TreeNode* left = lowestCommonAncestor(root->left, val1, val2);
+    TreeNode* right = lowestCommonAncestor(root->right, val1, val2);
     
-    nodes.push_back(A->val);
-    if(A->val == value)
-        return true;
-    
-    bool foundInleft = PreOrderTraversal(A->left, value, nodes);
-    bool foundInRight = PreOrderTraversal(A->right, value, nodes);
-    
-    if(foundInleft || foundInRight)
-        return true;
-    nodes.pop_back();
-    return false;
+    if(left != NULL && right != NULL)
+        return root;
+        
+    return left != NULL ? left : right;
+}
+
+int checkIfExists(TreeNode* A, int val)
+{
+    if(A == NULL)
+        return 0;
+        
+    if(A->val == val)
+        return 1;
+        
+    return checkIfExists(A->left, val) || checkIfExists(A->right, val);
 }
  
 int Solution::lca(TreeNode* A, int val1, int val2) {
@@ -35,33 +45,12 @@ int Solution::lca(TreeNode* A, int val1, int val2) {
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
-    int lca = -1;
-    bool foundVal1 = false, foundVal2 = false;
-    vector<int> pathToFirstElement, pathToSecondElement;
-    
-    foundVal1 = PreOrderTraversal(A,val1,pathToFirstElement);
-    if(!foundVal1)
-        return lca;
-    
-    foundVal2 = PreOrderTraversal(A,val2,pathToSecondElement);
-    if(!foundVal2)
-        return lca;
-    
-    int i=0;
-    while(i < pathToFirstElement.size() && i < pathToSecondElement.size()
-        && pathToFirstElement[i] == pathToSecondElement[i])
-        i++;
-    
-    /*
-    for(int i=0;i<pathToFirstElement.size();i++)
-        cout<<pathToFirstElement[i]<<" ";
-    cout<<"\n";
-    
-    for(int j=0;j<pathToSecondElement.size();j++)
-        cout<<pathToSecondElement[j]<<" ";
-    cout<<"\n";
-    */
- 
-    lca = pathToFirstElement[i-1];
-    return lca;  
+
+    if (!checkIfExists(A, val1) || !checkIfExists(A, val2))
+        return -1;
+
+    TreeNode* lcaRoot = lowestCommonAncestor(A, val1, val2);
+    if(lcaRoot != NULL)
+        return lcaRoot->val;
+    return -1;
 }
