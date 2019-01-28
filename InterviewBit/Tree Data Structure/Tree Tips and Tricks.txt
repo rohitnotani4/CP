@@ -62,6 +62,14 @@ This means we need not even explore the right subtree till we have explored ever
   https://leetcode.com/problems/flatten-binary-tree-to-linked-list/discuss/37010/Share-my-simple-NON-recursive-solution-O(1)-space-complexity!
   - The idea in above link is a variation of Morris tree traversal 
   
+16. Recover Binary Search Tree
+  - Solution with O(n) extra space is pretty straight forward
+  - For space efficient solution morris inorder traversal can be used. Refer below links :
+    https://leetcode.com/problems/recover-binary-search-tree/discuss/32562/Share-my-solutions-and-detailed-explanation-with-recursiveiterative-in-order-traversal-and-Morris-traversal
+    https://leetcode.com/problems/recover-binary-search-tree/discuss/32535/No-Fancy-Algorithm-just-Simple-and-Powerful-In-Order-Traversal
+    
+    
+  
 16. Least Common Ancestor
   - Linear solution using path calculation :
     1) Find path from root to n1 and store it in a vector or array.
