@@ -9,26 +9,19 @@ int Solution::lis(const vector<int> &A)
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    if(A.size() < 2)
-        return A.size();
-    
-    vector<int> dp;    
-    for(int i=0;i<A.size();i++)
-    {
-        dp.push_back(1);
-    }
-    
-    int subsequenceLength = 0;
-    for(int i=0;i<A.size();i++)
+    int n = A.size();
+    vector<int> dp(n, 1);
+    int maxLength = dp[0];
+    for(int i=1;i<n;i++)
     {
         for(int j=0;j<i;j++)
         {
-            if(A[j] < A[i])
-                dp[i] = max(dp[i], dp[j]+1);
+            if (A[j] < A[i] && dp[i] < (dp[j]+1))
+            {
+                dp[i] = dp[j] + 1;
+            }
         }
+        maxLength = max(maxLength, dp[i]);
     }
-    
-    for(int i=0;i<dp.size();i++)
-        subsequenceLength = max(subsequenceLength,dp[i]);
-    return subsequenceLength;
+    return maxLength;
 }
