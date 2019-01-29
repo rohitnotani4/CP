@@ -1,2 +1,7 @@
 > Simple array dp
-  1. Stairs - Straight forward - Fibonacci
+  1. Stairs 
+  - Straight forward - Fibonacci
+  
+  2. Longest Increasing Subsequence 
+  - O(n^2) solution. For each element check for all previos elments. LIS[i] = LIS[j] + 1 iff A[j] < A[i]. Find max from LIS array.
+  - Can be solved in O(n logn) time. Refer : https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
