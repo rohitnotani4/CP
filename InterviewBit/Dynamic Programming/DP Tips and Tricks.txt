@@ -10,3 +10,7 @@
   - Use the same logic as above to find the increasing subsequence
   - Decreasing sequence is nothing but increasing sequence from the end of the array. So calculate LIS from end of the array
   - result = max (LIS[i] + LDS[i] - 1) for i = 0 to n
+  
+  4. Ways To Decode
+  - https://www.youtube.com/watch?v=qli-JCrSwuk
+  - https://leetcode.com/problems/decode-ways/discuss/30451/Evolve-from-recursion-to-dp
