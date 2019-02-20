@@ -26,3 +26,11 @@
   
   2. Repeating Sub-Sequence
   - Same as Edit distance. Compare with same string and check if A[i] == A[j] for i != j
+  
+  3. Distinct Subsequences
+  - If the current character in S doesn't equal to current character T, then we have the same number of distinct subsequences as we had
+    without the new character. i.e dp[i][j] = dp[i][j-1] if S[i] != T[j]
+  - If the current character in S equal to the current character T, then the distinct number of subsequences: the number we had before 
+    plus the distinct number of subsequences we had with less longer T and less longer S. 
+    i.e dp[i][j] = dp[i-1][j-1] + dp[i][j-1] if S[i] == T[j]
+  - https://leetcode.com/problems/distinct-subsequences/discuss/37387/A-DP-solution-with-clarification-and-explanation
