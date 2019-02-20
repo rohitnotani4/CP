@@ -14,3 +14,15 @@
   4. Ways To Decode
   - https://www.youtube.com/watch?v=qli-JCrSwuk
   - https://leetcode.com/problems/decode-ways/discuss/30451/Evolve-from-recursion-to-dp
+
+> 2D - String DP
+  1. Edit Distance
+  - Initial expression based on given operations is f(i, j) =  min { f(i+1, j) -- Add, f(i-1, j) -- Remove, f(i-1, j-1) - Replace}
+  - Index i or j signify upto what point in the string we have come, like i = 4 means till 5th character in that string
+  - Since in recursion, we can't go from current state to future like f(i, j) => f(i+1, j) (That would lead to cyclic recursions), we
+    modify the Add in i, since addition to i means j has extra charater that we are trying to match, so instead we can remove that from j.
+  - New Expression => dp[i,j] = min { dp[i, j-1], dp[i-1, j], dp[i-1,j-1]; 
+  - Must watch : https://www.youtube.com/watch?v=XJ6e4BQYJ24
+  
+  2. Repeating Sub-Sequence
+  - Same as Edit distance. Compare with same string and check if A[i] == A[j] for i != j
