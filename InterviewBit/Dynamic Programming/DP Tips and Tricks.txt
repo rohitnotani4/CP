@@ -34,3 +34,20 @@
     plus the distinct number of subsequences we had with less longer T and less longer S. 
     i.e dp[i][j] = dp[i-1][j-1] + dp[i][j-1] if S[i] == T[j]
   - https://leetcode.com/problems/distinct-subsequences/discuss/37387/A-DP-solution-with-clarification-and-explanation
+  
+  4. Interleaving Strings
+  - https://www.geeksforgeeks.org/find-if-a-string-is-interleaved-of-two-other-strings-dp-33/
+  
+  5. Regular Expression Match
+  - First you simply the pattern by replacing consecutive '*' with single '*'
+  - Let index i be for the text and index j for the pattern. An empty string would match with empty pattern so dp[0][0] = 'T'
+  - An empty pattern wouldn't match with any text having length > 0. So T[i][0] = 'F' for all i > 0 and i < length of text
+  - A non empty pattern will match with an empty text only if the pattern is of type a*, a*b* etc.
+  - For all other cases, the equation is :
+    T[i][j] = { 
+                T[i-1][j-1] if current char in text and pattern are equal OR current char in pattern is '?'
+                T[i][j-2] if current char in pattern is '*' and we want zero occurrences of previous character
+                T[i-1][j] if current char in pattern is '*' and current char in text is equal to prev char in pattern or prev char in                    pattern is '?'
+                False if  current char in text and pattern don't match 
+              }
+            
