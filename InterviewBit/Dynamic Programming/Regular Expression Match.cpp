@@ -5,27 +5,25 @@ https://www.interviewbit.com/problems/regular-expression-match/
 string getOptimisedPattern(const string &p)
 {
     string optPattern;
-    bool isFirst = true;
-    for(int i=0;i<p.size();i++)
+    int i = 0;
+    while(i < p.size())
     {
-        if(p[i]=='*')
+        if(p[i] == '*')
         {
-            if(isFirst)
-            {
-                optPattern.push_back(p[i]);
-                isFirst = false;
-            }
+            optPattern.push_back(p[i]);
+            while(i < p.size() && p[i] == '*')
+                i++;
         }
         else
         {
             optPattern.push_back(p[i]);
-            isFirst = true;
+            i++;
         }
     }
     return optPattern;
 }
- 
-int Solution::isMatch(const string &s, const string &p) {
+
+int Solution::isMatch(const string s, const string p) {
     // Do not write main() function.
     // Do not read input, instead use the arguments to the function.
     // Do not print the output, instead return values as specified
@@ -34,47 +32,48 @@ int Solution::isMatch(const string &s, const string &p) {
     if(s.size() < 0 || p.size() < 0)
         return 0;
     
+    // string text = s;
     string optPattern = getOptimisedPattern(p);;
-    int textSize, patternSize;
-    textSize = s.empty() ? 0 : s.size();
-    patternSize = optPattern.empty() ? 0 : optPattern.size();
-    //cout<<"TextSize "<<textSize<<" OptPattern Size = "<<patternSize<<"\n";
-    vector<vector<bool> > dp(textSize+1, vector<bool>(patternSize+1));
-    //int dp[textSize+1][patternSize+1];
+    int textSize = s.size();
+    int patternSize = optPattern.size();
+    vector<vector<bool>> dp(textSize+1, vector<bool>(patternSize+1));
+    
+    if (optPattern.size() == 1 && optPattern[0] == '*')
+        return 1;
+    
+    // An empty string would match with empty pattern
     dp[0][0] = 1;
     
+    // An empty pattern wouldn't match with any text having length > 0
     for(int i=1;i<=textSize;i++)
         dp[i][0] = 0;
-    
+
     for(int j=1;j<=patternSize;j++)
     {
-        if(optPattern[j-1]=='*')
+        if (optPattern[j-1]=='*')
             dp[0][j] = dp[0][j-1];
         else
             dp[0][j] = 0;
     }
     
-    //if(patternSize > 0 && optPattern[0]=='*')
-    //    dp[0][1] = true;
-        
-    for(int i=1;i<=textSize;i++)
+    for(int i=1;i<dp.size();i++)
     {
-        for(int j=1;j<=patternSize;j++)
+        for(int j=1;j<dp[i].size();j++)
         {
-            if(optPattern[j-1]=='?' || (optPattern[j-1] == s[i-1]))
+            if (s[i-1] == optPattern[j-1] || optPattern[j-1] == '?')
             {
                 dp[i][j] = dp[i-1][j-1];
             }
             else
             if(optPattern[j-1]=='*')
+            {
                 dp[i][j] = dp[i-1][j] || dp[i][j-1];
+            }
             else
+            {
                 dp[i][j] = 0;
-            
-            //cout<<"dp["<<i<<"]["<<j<<"]= "<<dp[i][j]<<" ";
+            }
         }
-        //cout<<"\n";
-    }
-    
+    }    
     return dp[textSize][patternSize];
 }
