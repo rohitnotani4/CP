@@ -39,7 +39,7 @@
   - https://www.geeksforgeeks.org/find-if-a-string-is-interleaved-of-two-other-strings-dp-33/
   
   5. Regular Expression Match
-  - A variation of below problem. 
+  - A variation of below problem. In case of '*' just consider T[i-1][j] || T[i][j-1].
   
   6. Regular Expression II
   - First you simply the pattern by replacing consecutive '*' with single '*'
