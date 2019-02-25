@@ -54,3 +54,7 @@
                 False if  current char in text and pattern don't match 
               }
             
+> Greedy or dp
+  1. Jump Game Array
+  - For each index find the maxIndex that can be reached from that index
+  - If maxIndex < lastIndex && value at current index = 0 then we can't reach last index else if at any point maxIndex > lastIndex we       return true
