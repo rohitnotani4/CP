@@ -58,7 +58,15 @@
   1. Jump Game Array
   - For each index find the maxIndex that can be reached from that index
   - If maxIndex < lastIndex && value at current index = 0 then we can't reach last index else if at any point maxIndex > lastIndex we       return true
-
+  2. Min Jumps Array
+  - Change this problem to a BFS problem, where nodes in level i are all the nodes that can be reached in i-1th jump. 
+    For example. 2 3 1 1 4 , is
+    2||
+    3 1||
+    1 4 ||
+    Clearly, the minimum jump of 4 is 2 since 4 is in level 3.
+  - https://leetcode.com/problems/jump-game-ii/discuss/18028/O(n)-BFS-solution
+  
 > 0/1 Knapsack
   1. Coin Sum Infinite
   - https://www.youtube.com/watch?v=DJ4a7cmjZY0&t
