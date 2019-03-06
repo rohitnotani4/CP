@@ -8,31 +8,22 @@ int Solution::jump(vector<int> &A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
-    if(A.size() <= 1)
+    if (A.size() <= 1) 
         return 0;
-    
-    if(A[0]==0)
-        return -1;
-    int inputSize = A.size(), maxReach = A[0],step = A[0],jump = 1;
-    int dp[inputSize];
-    dp[0] = 0;
-    
-    for(int i=1;i<inputSize;i++)
+    int curLevelMax = 0; // Marks the last element in a level
+    int nextLevelMax = 0; // Marks the last element in the next level
+    int level = 0, i = 0;
+    while (i <= curLevelMax)
     {
-        if(i==inputSize-1)
-            return jump;
-            
-        maxReach = max(maxReach,i+A[i]);
-        
-        step--;
-        
-        if (step == 0)
+        while(i <= curLevelMax) 
         {
-            jump++;
-            if(i >= maxReach)
-                return -1;
-            step = maxReach - i;
+            nextLevelMax = max(nextLevelMax, A[i] + i);
+            if (nextLevelMax >= A.size() - 1) 
+                return level + 1;
+            i++;
         }
+        level++;
+        curLevelMax = nextLevelMax;
     }
     return -1;
 }
