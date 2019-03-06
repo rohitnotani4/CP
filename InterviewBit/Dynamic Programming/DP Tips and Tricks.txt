@@ -58,3 +58,7 @@
   1. Jump Game Array
   - For each index find the maxIndex that can be reached from that index
   - If maxIndex < lastIndex && value at current index = 0 then we can't reach last index else if at any point maxIndex > lastIndex we       return true
+
+> 0/1 Knapsack
+  1. Coin Sum Infinite
+  - https://www.youtube.com/watch?v=DJ4a7cmjZY0&t
