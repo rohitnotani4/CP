@@ -68,5 +68,10 @@
   - https://leetcode.com/problems/jump-game-ii/discuss/18028/O(n)-BFS-solution
   
 > 0/1 Knapsack
-  1. Coin Sum Infinite
+  1. Coin Sum Infinite 
   - https://www.youtube.com/watch?v=DJ4a7cmjZY0&t
+
+> Matrix DP
+  1. Min Sum Path In Matrix
+  - We can move only down and right so dp[i][j] = min(dp[i-1][j], dp[i][j-1])
+  
