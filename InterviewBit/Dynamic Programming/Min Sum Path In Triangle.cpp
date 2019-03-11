@@ -9,34 +9,17 @@ int Solution::minimumTotal(vector<vector<int> > &A) {
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
     
     if(A.size() < 1)
-	    return 0;
- 
-    if(A.size()==1)
-	    return A[0][0];
-	    
-	int inputSize = A.size();	
-	//cout<<"No of rows "<<inputSize<<"\n";
-    vector<int> prevRow(inputSize), currRow(inputSize);
-    prevRow[0] = A[0][0];
-    for(int i=1;i<inputSize;i++)
+        return 0;
+
+    int rows = A.size();
+    vector<int> minSumDP(A.back()); // Assign last row to DP array
+    
+    for(int i = rows-2;i>=0;i--)
     {
-    	for(int j=0;j<(i+1);j++)
-    	{
-    		if(j==0)
-    			currRow[j] = prevRow[j] + A[i][j];
-    		else
-    		if(j==i)
-    			currRow[j] = prevRow[j-1] + A[i][j];
-    		else
-    			currRow[j] = min(prevRow[j-1]+A[i][j], prevRow[j] + A[i][j]);
-    	}
-    	// prevRow.clear();
-    	prevRow = currRow;
-    }
-    
-    int minSum = currRow[0];
-    for(int i=1;i<inputSize;i++)
-    	minSum = min(minSum,currRow[i]);
-    
-    return minSum;	    
+        for(int j=0;j<A[i].size();j++)
+        {
+            minSumDP[j] = min (minSumDP[j], minSumDP[j+1]) + A[i][j];
+        }
+    }    
+    return minSumDP[0];        
 }
