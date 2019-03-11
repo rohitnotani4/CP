@@ -10,41 +10,21 @@ int Solution::uniquePathsWithObstacles(vector<vector<int> > &A) {
     
     if(A.size() < 1)
         return 0;
-    
     int rows = A.size(), cols = A[0].size();
-    vector<vector<int> > dp(rows, vector<int> (cols, 0));    
-    
-    if(A[0][0]==1)
-        dp[0][0] = 0;
-    else
-        dp[0][0] = 1;
-        
-    for(int i=1;i<A.size();i++)
+    vector<vector<int> > dp(rows, vector<int> (cols, 0)); 
+    for(int i=0;i<A.size();i++)
     {
-        if(A[i][0]==1)
-            dp[i][0] = 0;
-        else
-            dp[i][0] = dp[i-1][0];
-    }
-    
-    for(int j=1;j<A[0].size();j++)
-    {
-        if(A[0][j]==1)
-            dp[0][j] = 0;
-        else
-            dp[0][j] = dp[0][j-1];
-    }
-    
-    for(int i=1;i<A.size();i++)
-    {
-        for(int j=1;j<A[i].size();j++)
+        for(int j=0;j<A[i].size();j++)
         {
-            if(A[i][j]==1)
-                dp[i][j] = 0;
-            else
-                dp[i][j] = dp[i-1][j] + dp[i][j-1];
+            if (A[i][j])
+                continue;
+            if (i == 0 && j == 0)
+                dp[i][j] = 1; 
+            if (i > 0)
+                dp[i][j] += dp[i-1][j];
+            if(j > 0)
+                dp[i][j] += dp[i][j-1];
         }
     }
-    
     return dp[rows-1][cols-1];
 }
