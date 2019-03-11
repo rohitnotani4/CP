@@ -81,4 +81,5 @@
     minSumDP[j] = min (minSumDP[j], minSumDP[j+1]) + A[i][j];
   - Minimum would be minSumDP[0];
   
-  
+  3. Unique Paths In A Grid
+  - Straightforward. dp[i][j] = dp[i-1][j] + dp[i][j-1] iff A[i][j] != 1
