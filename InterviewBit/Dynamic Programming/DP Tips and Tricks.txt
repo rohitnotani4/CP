@@ -75,3 +75,10 @@
   1. Min Sum Path In Matrix
   - We can move only down and right so dp[i][j] = min(dp[i-1][j], dp[i][j-1])
   
+  2. Min Sum Path In Triangle
+  - If we process from top to bottom we need storage for previous and current row. 2 * O(n) space complexity.
+  - Instead, initialize DP with last row and process from bottom to top, dp for each row would be :
+    minSumDP[j] = min (minSumDP[j], minSumDP[j+1]) + A[i][j];
+  - Minimum would be minSumDP[0];
+  
+  
