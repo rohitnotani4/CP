@@ -83,3 +83,9 @@
   
   3. Unique Paths In A Grid
   - Straightforward. dp[i][j] = dp[i-1][j] + dp[i][j-1] iff A[i][j] != 1
+
+  4. Max Rectangle in Binary Matrix.cpp
+  - Each row of rectangle can be thought of as bars of height 0 and 1.
+  - For every row add the current value to the heights calculated from previous rows. If current value is zero, make height for current column zero whatever the previous value is. 
+  - The problem can be solved like "Largest Rectangle in Histogram" problem. Just solve it for each row and find max out of all rows.
+  - https://leetcode.com/problems/largest-rectangle-in-histogram/
